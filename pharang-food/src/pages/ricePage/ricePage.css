@@ -1,0 +1,9 @@
+.rice-page {
+    margin-top: 70px;
+      /* height: 100vh; */
+      display: flex;
+      flex-wrap: wrap;
+      padding: 50px;
+      border: 1px solid blue;
+      background-color: rgb(248, 247, 247);
+}

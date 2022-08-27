@@ -1,0 +1,20 @@
+.container-login-form {
+  background-color: white;
+  border: 1px solid blue;
+  width: 35%;
+  height: 60vh;
+}
+
+.login {
+  width: 35%;
+  height: 80vh;
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+  padding: 10px;
+  background-color: white;
+}
+
