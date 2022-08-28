@@ -1,3 +1,19 @@
 .list-horizontal {
-  margin-top: 70px;
+  /* margin-top: 70px; */
+}
+
+.react-horizontal-scrolling-menu--scroll-container {
+overflow: hidden
+}
+
+.react-horizontal-scrolling-menu--arrow-left,
+.react-horizontal-scrolling-menu--arrow-right {
+  display: flex;
+  align-items: center;
+}
+
+.css-h3bten-MuiButtonBase-root-MuiIconButton-root.Mui-disabled {
+  background-color: transparent;
+  height: 40px;
+  color: rgba(145, 158, 171, 0.8);
 }

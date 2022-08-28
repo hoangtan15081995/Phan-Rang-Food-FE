@@ -21,13 +21,13 @@ function Router() {
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route index element={<HomePage />} />
-        <Route path="/rice" element={<RicePage />} />
+        {/* <Route path="/rice" element={<RicePage />} />
         <Route path="/noodleSoup" element={<NoodleSoupPage />} />
         <Route path="/porridge" element={<PorridgePage />} />
         <Route path="/hotpot" element={<HotPotPage />} />
         <Route path="/juice" element={<JuicePage />} />
         <Route path="/coffee" element={<CoffeePage />} />
-        <Route path="/milktea" element={<MilkTeaPage />} />
+        <Route path="/milktea" element={<MilkTeaPage />} /> */}
         <Route path="/detail" element={<DetailPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/order" element={<OrderPage />} />

@@ -13,6 +13,7 @@ import SyncIcon from "@mui/icons-material/Sync";
 import ListHorizontal from '../../components/listHorizontal/ListHorizontal';
 
 function HomePage() {
+
   const array = [
     "1",
     "1",
@@ -20,150 +21,207 @@ function HomePage() {
     "1",
     "1",
     "1",
-    "1"  ];
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1"
+  ];
   let surplus = array.length % 4;
   return (
     <>
-      <ListHorizontal />
-      <div className="home-page">
+      <div id="position" className="home-page">
+        {/* div cơm  */}
         <div
-          id="rice-page-food"
           style={{
-            display: "flex",
-            flexDirection: "column",
-            border: "1px solid black",
+            width: "972px",
+            // margin: "auto",
+            marginTop: 25,
+            marginBottom: 25,
+            // display: "flex",
+            // border: "1px solid black",
           }}
         >
           <p
             style={{
               margin: 0,
-              border: "1px solid black",
+              // border: "1px solid black",
             }}
           >
             Cơm
           </p>
-          <div
+          <ListHorizontal array={array} />
+          <Button
             style={{
-              border: "1px solid black",
-              width: "995.140px",
-              marginTop: 50,
-              // marginBottom: 50,
-              display: "flex",
-              marginLeft: "auto",
-              marginRight: "auto",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
+              width: "100%",
+              margin: 0,
+              // border: "1px solid black",
             }}
           >
-            {array.map((e, index) => {
-              return <FCard key={index} />;
-            })}
-            {surplus === 3 ? (
-              <div
-                style={{ width: "210px", height: "230px", marginBottom: 5 }}
-              ></div>
-            ) : (
-              ""
-            )}
-            {surplus === 2 ? (
-              <>
-                <div
-                  style={{ width: "210px", height: "230px", marginBottom: 5 }}
-                ></div>
-                <div
-                  style={{ width: "210px", height: "230px", marginBottom: 5 }}
-                ></div>
-              </>
-            ) : (
-              ""
-            )}
-            {surplus === 1 ? (
-              <>
-                <div
-                  style={{ width: "210px", height: "230px", marginBottom: 5 }}
-                ></div>
-                <div
-                  style={{ width: "210px", height: "230px", marginBottom: 5 }}
-                ></div>
-                <div
-                  style={{ width: "210px", height: "230px", marginBottom: 5 }}
-                ></div>
-              </>
-            ) : (
-              ""
-            )}
-          </div>
+            Xem tất cả món ăn
+          </Button>
         </div>
+
+        {/* div Phở  */}
         <div
-          id="noodleSoup-page-food"
           style={{
-            display: "flex",
-            flexDirection: "column",
-            border: "1px solid black",
+            width: "972px",
+            // margin: "auto",
+            marginTop: 25,
+            marginBottom: 25,
+            // display: "flex",
+            // border: "1px solid black",
           }}
         >
           <p
             style={{
               margin: 0,
-              border: "1px solid black",
+              // border: "1px solid black",
             }}
           >
             Phở
           </p>
-          <div
+          <ListHorizontal array={array} />
+          <Button
             style={{
+              width: "100%",
+              margin: 0,
               // border: "1px solid black",
-              width: "995.140px",
-              marginTop: 50,
-              // marginBottom: 50,
-              display: "flex",
-              marginLeft: "auto",
-              marginRight: "auto",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
             }}
           >
-            {array.map((e, index) => {
-              return <FCard key={index} />;
-            })}
-            {surplus === 3 ? (
-              <div
-                style={{ width: "210px", height: "230px", marginBottom: 5 }}
-              ></div>
-            ) : (
-              ""
-            )}
-            {surplus === 2 ? (
-              <>
-                <div
-                  style={{ width: "210px", height: "230px", marginBottom: 5 }}
-                ></div>
-                <div
-                  style={{ width: "210px", height: "230px", marginBottom: 5 }}
-                ></div>
-              </>
-            ) : (
-              ""
-            )}
-            {surplus === 1 ? (
-              <>
-                <div
-                  style={{ width: "210px", height: "230px", marginBottom: 5 }}
-                ></div>
-                <div
-                  style={{ width: "210px", height: "230px", marginBottom: 5 }}
-                ></div>
-                <div
-                  style={{ width: "210px", height: "230px", marginBottom: 5 }}
-                ></div>
-              </>
-            ) : (
-              ""
-            )}
-          </div>
+            Xem tất cả món ăn
+          </Button>
         </div>
+
+        {/* div cháo  */}
         <div
-          id="porridge-page-food"
+          style={{
+            width: "972px",
+            // margin: "auto",
+            marginTop: 25,
+            marginBottom: 25,
+            // display: "flex",
+            // border: "1px solid black",
+          }}
+        >
+          <p
+            style={{
+              margin: 0,
+              // border: "1px solid black",
+            }}
+          >
+            Cháo
+          </p>
+          <ListHorizontal array={array} />
+          <Button
+            style={{
+              width: "100%",
+              margin: 0,
+              // border: "1px solid black",
+            }}
+          >
+            Xem tất cả món ăn
+          </Button>
+        </div>
+
+        {/* div lẩu  */}
+        <div
+          style={{
+            width: "972px",
+            // margin: "auto",
+            marginTop: 25,
+            marginBottom: 25,
+            // display: "flex",
+            // border: "1px solid black",
+          }}
+        >
+          <p
+            style={{
+              margin: 0,
+              // border: "1px solid black",
+            }}
+          >
+            Lẩu
+          </p>
+          <ListHorizontal array={array} />
+          <Button
+            style={{
+              width: "100%",
+              margin: 0,
+              // border: "1px solid black",
+            }}
+          >
+            Xem tất cả món ăn
+          </Button>
+        </div>
+
+        {/* div nước ép  */}
+        <div
+          style={{
+            width: "972px",
+            // margin: "auto",
+            marginTop: 25,
+            marginBottom: 25,
+            // display: "flex",
+            // border: "1px solid black",
+          }}
+        >
+          <p
+            style={{
+              margin: 0,
+              // border: "1px solid black",
+            }}
+          >
+            Nước ép
+          </p>
+          <ListHorizontal array={array} />
+          <Button
+            style={{
+              width: "100%",
+              margin: 0,
+              // border: "1px solid black",
+            }}
+          >
+            Xem tất cả món ăn
+          </Button>
+        </div>
+
+        {/* div trà sữa  */}
+        <div
+          style={{
+            width: "972px",
+            // margin: "auto",
+            marginTop: 25,
+            marginBottom: 25,
+            // display: "flex",
+            // border: "1px solid black",
+          }}
+        >
+          <p
+            style={{
+              margin: 0,
+              // border: "1px solid black",
+            }}
+          >
+            Trà sữa
+          </p>
+          <ListHorizontal array={array} />
+          <Button
+            style={{
+              width: "100%",
+              margin: 0,
+              // border: "1px solid black",
+            }}
+          >
+            Xem tất cả món ăn
+          </Button>
+        </div>
+
+        {/* div cà phê  */}
+        {/* <div
           style={{
             display: "flex",
             flexDirection: "column",
@@ -176,7 +234,7 @@ function HomePage() {
               border: "1px solid black",
             }}
           >
-            Cháo
+            Cà phê
           </p>
           <div
             style={{
@@ -229,16 +287,34 @@ function HomePage() {
               ""
             )}
           </div>
-        </div>
+        </div> */}
         <div
           style={{
-            border: "1px solid black",
-            width: "995.140px",
-            textAlign: "center",
+            width: "972px",
+            // margin: "auto",
+            marginTop: 25,
+            marginBottom: 25,
+            // display: "flex",
+            // border: "1px solid black",
           }}
         >
-          <Button>
-            Xem thêm <SyncIcon />
+          <p
+            style={{
+              margin: 0,
+              // border: "1px solid black",
+            }}
+          >
+            Cà phê
+          </p>
+          <ListHorizontal array={array} />
+          <Button
+            style={{
+              width: "100%",
+              margin: 0,
+              // border: "1px solid black",
+            }}
+          >
+            Xem tất cả món ăn
           </Button>
         </div>
       </div>

@@ -15,9 +15,13 @@ export default function FCard() {
     const navigate = useNavigate();
     const handleOnclickDetail = (id) => {
       navigate("/detail");
+      window.scroll({
+        top: 0,
+        behavior: "smooth"
+      })
     };
   return (
-    <Card sx={{ width: 210, height: 230, marginBottom: "50px" }}>
+    <Card sx={{ width: 210, height: 230, marginRight: "20px" }}>
       <CardActionArea>
         <CardMedia
           onClick={() => handleOnclickDetail()}
@@ -26,11 +30,11 @@ export default function FCard() {
           height="100"
           image={pizza}
           alt="green iguana"
-          style={{ border: "1px solid black" }}
+          // style={{ border: "1px solid black" }}
         />
         <CardContent
           style={{
-            border: "1px solid black",
+            // border: "1px solid black",
             height: 130,
             padding: 0,
             display: "flex",
@@ -40,13 +44,13 @@ export default function FCard() {
         >
           <div
             onClick={() => handleOnclickDetail()}
-            style={{ border: "1px solid black" }}
+            // style={{ border: "1px solid black" }}
           >
             <Typography>food name</Typography>
           </div>
           <div
             style={{
-              border: "1px solid black",
+              // border: "1px solid black",
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
@@ -57,14 +61,16 @@ export default function FCard() {
               price
             </Typography>
           </div>
-          <div style={{ border: "1px solid black" }}>
+          <div
+            // style={{ border: "1px solid black" }}
+          >
             <Typography variant="body2" color="text.secondary">
               30 lê văn sĩ phường 11 quận 3 hcm 
             </Typography>
           </div>
           <div
             style={{
-              border: "1px solid black",
+              // border: "1px solid black",
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
@@ -72,7 +78,7 @@ export default function FCard() {
           >
             <div
               style={{
-                border: "1px solid black",
+                // border: "1px solid black",
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
@@ -87,7 +93,7 @@ export default function FCard() {
             </div>
             <div
               style={{
-                border: "1px solid black",
+                // border: "1px solid black",
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",

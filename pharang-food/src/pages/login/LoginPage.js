@@ -39,7 +39,7 @@ function LoginPage() {
  });
     useEffect(() => {
       if (accessToken) {
-        navigate(locationPathname);
+        navigate("/");
       }
     }, [accessToken, navigate]);
   const onSubmit = data => {
@@ -51,7 +51,7 @@ function LoginPage() {
           // console.log(user.accessToken);
           setError(false);
           window.localStorage.setItem("user", user.accessToken);
-          navigate(locationPathname);
+          navigate("/");
         })
         .catch((error) => {
           console.log(error.message)
@@ -231,7 +231,7 @@ function LoginPage() {
               // border: "1px solid black",
             }}
           >
-            <Checkbox label="check box" size="small" />
+            <Checkbox label="check box" size="small" checked={true} />
             <p style={{ fontSize: "10px" }}>Lưu tài khoản</p>
           </div>
           <Link to="/register">

@@ -1,14 +1,17 @@
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import React from "react";
 import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
-import "./ListHorizontal.css"
+import FCard from "../Card";
+import "./ListHorizontal.css";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const getItems = () =>
   Array(20)
     .fill(0)
     .map((_, ind) => ({ id: `element-${ind}` }));
 
-function ListHorizontal() {
+function ListHorizontal({array}) {
   const [items, setItems] = React.useState(getItems);
   const [selected, setSelected] = React.useState([]);
   const [position, setPosition] = React.useState(0);
@@ -29,14 +32,17 @@ function ListHorizontal() {
 
   return (
     <div className="list-horizontal">
-      <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
-        {items.map(({ id }) => (
-          <Card
-            itemId={id} // NOTE: itemId is required for track items
-            title={id}
-            key={id}
-            onClick={handleClick(id)}
-            selected={isItemSelected(id)}
+      <ScrollMenu
+        LeftArrow={LeftArrow}
+        RightArrow={RightArrow}
+      >
+        {array.map(({food, index }) => (
+          <FCard
+            // itemId={id} // NOTE: itemId is required for track items
+            // title={id}
+            key={index}
+            // onClick={handleClick(id)}
+            // selected={isItemSelected(id)}
           />
         ))}
       </ScrollMenu>
@@ -49,19 +55,23 @@ function LeftArrow() {
     React.useContext(VisibilityContext);
 
   return (
-    <Button disabled={isFirstItemVisible} onClick={() => scrollPrev()}>
-      Left
-    </Button>
+    <IconButton disabled={isFirstItemVisible} onClick={() => scrollPrev()}>
+      <ArrowBackIosNewIcon
+        style={{ fontSize: "20px" }}
+      />
+    </IconButton>
   );
 }
 
 function RightArrow() {
   const { isLastItemVisible, scrollNext } = React.useContext(VisibilityContext);
-  console.log(isLastItemVisible);
+  // console.log(isLastItemVisible);
   return (
-    <Button disabled={isLastItemVisible} onClick={() => { scrollNext(); console.log("ok") }}>
-      Right
-    </Button>
+    <IconButton disabled={isLastItemVisible} onClick={() => scrollNext()}>
+      <ArrowForwardIosIcon
+        style={{  fontSize: "20px" }}
+      />
+    </IconButton>
   );
 }
 
@@ -83,7 +93,7 @@ function Card({ onClick, selected, title, itemId }) {
       </div>
       <div
         style={{
-          height: "200px",
+          height: "100px",
         }}
       />
     </div>

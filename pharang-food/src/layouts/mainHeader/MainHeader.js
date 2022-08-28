@@ -22,7 +22,7 @@ import SelectMenu from "../../components/selectMenu";
 import Badges from "../../components/badge"
 import SearchIcon from "@mui/icons-material/Search";
 import TDrawer from "../../components/drawer";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {setLocation} from "../../features/location/locationSlice"
 import FSearch from "../../components/Search";
@@ -30,132 +30,171 @@ import FSearch from "../../components/Search";
 
 export default function MainHeader() {
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [active, setActive] = useState("All");
-  // const [pdr, setPdr] = useState(false);
+  const [active, setActive] = useState("Cơm");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const [value, setValue] = React.useState("one");
+  const [value, setValue] = useState("one");
 
   const accessToken = window.localStorage.getItem("user");
-  // console.log(accessToken);
-
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  {
+      let position = document.getElementById("position");
+
+      window.addEventListener("scroll", function (event) {
+        let scroll_y = this.scrollY;
+        // console.log(scroll_y);
+        if (scroll_y < 230) {
+          setValue("one");
+        }
+        if (scroll_y > 230) {
+          setValue("two");
+        }
+        if (scroll_y > 530) {
+          setValue("three");
+        }
+        if (scroll_y > 830) {
+          setValue("four");
+        }
+        if (scroll_y > 1130) {
+          setValue("five");
+        }if (scroll_y > 1430) {
+          setValue("six");
+        }
+        if (scroll_y > 1730) {
+          setValue("seven");
+        }
+      });
+  } 
+  
   const { locationPathname } = useSelector((state) => state.location);
-  // console.log(locationPathname, "redux");
+  console.log(locationPathname, "redux");
+  console.log(value)
 
   // console.log(active, "active");
-  // console.log(pdr);
   useEffect(() => {
-    dispatch(setLocation(location.pathname));
-  }, [location.pathname]);
+     switch (value) {
+       case "one":
+         dispatch(setLocation("rice"));
+         break;
+       case "two":
+         dispatch(setLocation("noodleSoup"));
+         break;
+       case "three":
+         dispatch(setLocation("porridge"));
+         break;
+       case "four":
+         dispatch(setLocation("hotpot"));
+         break;
+       case "five":
+         dispatch(setLocation("juice"));
+         break;
+       case "six":
+         dispatch(setLocation("milktea"));
+         break;
+       case "seven":
+         dispatch(setLocation("coffee"));
+         break;
+       default:
+         break;
+     }
+  }, [value]);
   
-   useEffect(() => {
-      switch (locationPathname) {
-        case "/":
-          setValue("one");
-          break;
-        case "/rice":
-           setValue("two");
-          break;
-        case "/noodleSoup":
-           setValue("three");
-          break;
-        case "/porridge":
-           setValue("four");
-          break;
-        case "/hotpot":
-           setValue("five");
-          break;
-        case "/juice":
-           setValue("six");
-          break;
-        case "/milktea":
-           setValue("seven");
-          break;
-        case "/coffee":
-           setValue("eight");
-          break;
-        default:
-          break;
-      }
-   }, [locationPathname]);
+  useEffect(() => {
+    //  window.scrollTo({
+    //    top: 681,
+    //    behavior: "smooth",
+    //  });
+    
+  }, []);
   
   const options = [
-    { id: "one", option: "All", active: false },
-    { id: "two", option: "Cơm", active: false },
-    { id: "three", option: "Phở", active: false },
-    { id: "four", option: "Cháo", active: false },
-    { id: "five", option: "Lẩu", active: false },
-    { id: "six", option: "Nước ép", active: false },
-    { id: "seven", option: "Trà sữa", active: false },
-    { id: "eight", option: "Cà phê", active: false },
+    { id: "one", option: "Cơm", active: false },
+    { id: "two", option: "Phở", active: false },
+    { id: "three", option: "Cháo", active: false },
+    { id: "four", option: "Lẩu", active: false },
+    { id: "five", option: "Nước ép", active: false },
+    { id: "six", option: "Trà sữa", active: false },
+    { id: "seven", option: "Cà phê", active: false },
   ];
 
   const handleClickOption = (option) => {
-    setActive(option.option);
     switch (option.option) {
-      case "All":
-        navigate("/");
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        })
-        break;
       case "Cơm":
-        navigate("/");
+        // navigate("/rice");
+        // setValueTab("rice")
+        setValue("one");
         window.scrollTo({
           top: 0,
           behavior: "smooth",
         });
-        // navigate("/rice");
         break;
       case "Phở":
-        navigate("/");
-         window.scrollTo({
-           top: 640,
-           behavior: "smooth",
-         });
         // navigate("/noodleSoup");
-        break;
-      case "Cháo":
-        navigate("/");
+        // setValueTab("noodleSoup");
+        setValue("two");
         window.scrollTo({
-          top: 1280,
+          top: 340.5,
           behavior: "smooth",
         });
+        break;
+      case "Cháo":
         // navigate("/porridge");
+        // setValueTab("porridge");
+        setValue("three");
+        window.scrollTo({
+          top: 681,
+          behavior: "smooth",
+        });
         break;
       case "Lẩu":
-        navigate("/");
         // navigate("/hotpot");
+        // setValueTab("hotpot");
+        setValue("four");
+        window.scrollTo({
+          top: 1021.5,
+          behavior: "smooth",
+        });
         break;
       case "Nước ép":
-        navigate("/");
         // navigate("/juice");
+        // setValueTab("juice");
+        setValue("five");
+        window.scrollTo({
+          top: 1362,
+          behavior: "smooth",
+        });
         break;
       case "Trà sữa":
-        navigate("/");
         // navigate("/milktea");
+        // setValueTab("milktea");
+        setValue("six");
+        window.scrollTo({
+          top: 1702.5,
+          behavior: "smooth",
+        });
         break;
       case "Cà phê":
-        navigate("/");
         // navigate("/coffee");
+        // setValueTab("coffee");
+        setValue("seven");
+        window.scrollTo({
+          top: 2043,
+          behavior: "smooth",
+        });
         break;
       default:
         break;
     }
   };
   const handleOpenUserMenu = (event) => {
-    // setPdr(true);
     setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseUserMenu = (setting) => {
-    // setPdr(false);
     const from = location.pathname || "/";
     switch (setting) {
       case "Profile":
@@ -187,10 +226,6 @@ export default function MainHeader() {
     },
   }));
 
-  // const setPdrSelectMenu = (condition) => {
-  //   setPdr(condition);
-  // }
-
   return (
     <div className="container-header">
       <div className="container">
@@ -206,18 +241,17 @@ export default function MainHeader() {
           >
             <IconButton
               onClick={() => {
+                navigate("/");
                 window.scrollTo({
                   top: 0,
                   left: 0,
                   behavior: "smooth",
                 });
-                navigate("/");
-                setValue("one");
               }}
               style={{ width: "auto", height: "auto" }}
             >
               <motion.img
-                whileTap={{ scale: 0.7 }}
+                whileTap={{ scale: 1 }}
                 src={ninhthuan}
                 alt="logo"
                 width="35px"
@@ -246,8 +280,8 @@ export default function MainHeader() {
               <Tabs
                 value={value}
                 onChange={handleChange}
-                textColor="secondary"
-                indicatorColor="secondary"
+                // textColor="secondary"
+                // indicatorColor="secondary"
                 variant="scrollable"
                 scrollButtons="auto"
                 aria-label="secondary tabs example"
@@ -257,19 +291,16 @@ export default function MainHeader() {
                   },
                 }}
               >
-                {/* <a href="rice-page-food">Cơm</a>
-                <a href="noodleSoup-page-food">Phở</a>
-                <a href="porridge-page-food">Cháo</a> */}
 
                 {options.map((option) => {
-                  return (
-                    <Tab
-                      // style={{ width: 5, height: 5, fontSize: 11 }}
-                      onClick={() => handleClickOption(option)}
-                      key={option.id}
-                      value={option.id}
-                      label={option.option}
-                    />
+                  return (     
+                      <Tab
+                        // style={{ width: 5, height: 5, fontSize: 11 }}
+                        onClick={() => handleClickOption(option)}
+                        key={option.id}
+                        value={option.id}
+                        label={option.option}
+                      />
                   );
                 })}
               </Tabs>

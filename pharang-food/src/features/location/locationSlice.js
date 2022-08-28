@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  locationPathname: "/rice"
+  locationPathname: "rice"
 };
 
 const slice = createSlice({
