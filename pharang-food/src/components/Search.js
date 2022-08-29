@@ -2,6 +2,10 @@ import * as React from "react";
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate, useLocation } from "react-router-dom";
+import { IconButton } from "@mui/material";
+import "./Search.css";
+
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -33,28 +37,42 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    // paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
-      width: "12ch",
+      // transition: "1s",
+      width: "20ch",
       "&:focus": {
-        width: "20ch",
+        // transition: "3s",s
+        width: "40ch",
       },
     },
   },
 }));
 
-export default function FSearch() {
+export default function FSearch({ setSearch }) {
+  const location = useLocation();
+  const navigate = useNavigate();
   return (
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+    <form
+      onSubmit={(e) => {
+        console.log("enter", e);
+        e.preventDefault();
+      }}
+    >
+      <Search>
+        <IconButton type="submit">
+          <SearchIcon />
+        </IconButton>
+        <SearchIconWrapper></SearchIconWrapper>
+        <StyledInputBase
+          placeholder="Search…"
+          inputProps={{ "aria-label": "search" }}
+          onClick={() => { navigate("/search"); window.scrollTo({top: 0, behavior: "smooth"}) }}
+          onChange={(e) => console.log(e.target.value)}
+        />
+      </Search>
+    </form>
   );
 }

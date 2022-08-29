@@ -13,6 +13,7 @@ import SyncIcon from "@mui/icons-material/Sync";
 import ListHorizontal from '../../components/listHorizontal/ListHorizontal';
 
 function HomePage() {
+  const navigate = useNavigate();
 
   const array = [
     "1",
@@ -55,6 +56,7 @@ function HomePage() {
           </p>
           <ListHorizontal array={array} />
           <Button
+            onClick={() => navigate("/rice")}
             style={{
               width: "100%",
               margin: 0,
@@ -86,6 +88,7 @@ function HomePage() {
           </p>
           <ListHorizontal array={array} />
           <Button
+            onClick={() => navigate("/noodleSoup")}
             style={{
               width: "100%",
               margin: 0,
@@ -117,6 +120,7 @@ function HomePage() {
           </p>
           <ListHorizontal array={array} />
           <Button
+            onClick={() => navigate("/porridge")}
             style={{
               width: "100%",
               margin: 0,
@@ -148,6 +152,7 @@ function HomePage() {
           </p>
           <ListHorizontal array={array} />
           <Button
+            onClick={() => navigate("/hotpot")}
             style={{
               width: "100%",
               margin: 0,
@@ -179,6 +184,7 @@ function HomePage() {
           </p>
           <ListHorizontal array={array} />
           <Button
+            onClick={() => navigate("/juice")}
             style={{
               width: "100%",
               margin: 0,
@@ -210,6 +216,7 @@ function HomePage() {
           </p>
           <ListHorizontal array={array} />
           <Button
+            onClick={() => navigate("/milktea")}
             style={{
               width: "100%",
               margin: 0,
@@ -308,6 +315,7 @@ function HomePage() {
           </p>
           <ListHorizontal array={array} />
           <Button
+            onClick={() => navigate("/coffee")}
             style={{
               width: "100%",
               margin: 0,

@@ -31,18 +31,21 @@ import FSearch from "../../components/Search";
 export default function MainHeader() {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [active, setActive] = useState("Cơm");
+  const [search, setSearch] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
   const [value, setValue] = useState("one");
 
   const accessToken = window.localStorage.getItem("user");
+  console.log(search)
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   {
-      let position = document.getElementById("position");
+      let position = document.getElementById("container-header");
 
       window.addEventListener("scroll", function (event) {
         let scroll_y = this.scrollY;
@@ -71,8 +74,8 @@ export default function MainHeader() {
   } 
   
   const { locationPathname } = useSelector((state) => state.location);
-  console.log(locationPathname, "redux");
-  console.log(value)
+  // console.log(locationPathname, "redux");
+  // console.log(value)
 
   // console.log(active, "active");
   useEffect(() => {
@@ -122,69 +125,76 @@ export default function MainHeader() {
   ];
 
   const handleClickOption = (option) => {
+    // debugger
     switch (option.option) {
       case "Cơm":
-        // navigate("/rice");
+        // navigate("/");
         // setValueTab("rice")
-        setValue("one");
         window.scrollTo({
           top: 0,
           behavior: "smooth",
         });
+        setValue("one");
         break;
       case "Phở":
         // navigate("/noodleSoup");
         // setValueTab("noodleSoup");
-        setValue("two");
+        // navigate("/");
         window.scrollTo({
           top: 340.5,
           behavior: "smooth",
         });
+        setValue("two");
         break;
       case "Cháo":
+        // navigate("/");
         // navigate("/porridge");
         // setValueTab("porridge");
-        setValue("three");
         window.scrollTo({
           top: 681,
           behavior: "smooth",
         });
+        setValue("three");
         break;
       case "Lẩu":
+        // navigate("/");
         // navigate("/hotpot");
         // setValueTab("hotpot");
-        setValue("four");
         window.scrollTo({
           top: 1021.5,
           behavior: "smooth",
         });
+        setValue("four");
         break;
       case "Nước ép":
+        // navigate("/");
         // navigate("/juice");
         // setValueTab("juice");
-        setValue("five");
         window.scrollTo({
           top: 1362,
           behavior: "smooth",
         });
+        setValue("five");
         break;
       case "Trà sữa":
+        // navigate("/");
         // navigate("/milktea");
         // setValueTab("milktea");
-        setValue("six");
         window.scrollTo({
           top: 1702.5,
           behavior: "smooth",
         });
+        setValue("six");
         break;
       case "Cà phê":
+        // navigate("/");
         // navigate("/coffee");
         // setValueTab("coffee");
-        setValue("seven");
         window.scrollTo({
           top: 2043,
           behavior: "smooth",
         });
+        setValue("seven");
         break;
       default:
         break;
@@ -260,7 +270,7 @@ export default function MainHeader() {
             </IconButton>
             <h6>85 Food</h6>
           </div>
-          <div
+          {/* <div
             style={{
               width: 135,
               display: "flex",
@@ -269,31 +279,31 @@ export default function MainHeader() {
             }}
           >
             <SelectMenu />
-          </div>
-          <div>
-            <Box
-              sx={{
-                width: 400,
-                // bgcolor: "background.paper",
-              }}
-            >
-              <Tabs
-                value={value}
-                onChange={handleChange}
-                // textColor="secondary"
-                // indicatorColor="secondary"
-                variant="scrollable"
-                scrollButtons="auto"
-                aria-label="secondary tabs example"
+          </div> */}
+          {location.pathname === "/" && (
+            <div>
+              <Box
                 sx={{
-                  [`& .${tabsClasses.scrollButtons}`]: {
-                    "&.Mui-disabled": { opacity: 0.3 },
-                  },
+                  width: 400,
+                  // bgcolor: "background.paper",
                 }}
               >
-
-                {options.map((option) => {
-                  return (     
+                <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  // textColor="secondary"
+                  // indicatorColor="secondary"
+                  variant="scrollable"
+                  scrollButtons="auto"
+                  aria-label="secondary tabs example"
+                  sx={{
+                    [`& .${tabsClasses.scrollButtons}`]: {
+                      "&.Mui-disabled": { opacity: 0.3 },
+                    },
+                  }}
+                >
+                  {options.map((option) => {
+                    return (
                       <Tab
                         // style={{ width: 5, height: 5, fontSize: 11 }}
                         onClick={() => handleClickOption(option)}
@@ -301,14 +311,15 @@ export default function MainHeader() {
                         value={option.id}
                         label={option.option}
                       />
-                  );
-                })}
-              </Tabs>
-            </Box>
-          </div>
+                    );
+                  })}
+                </Tabs>
+              </Box>
+            </div>
+          )}
         </div>
         <div>
-          <FSearch />
+          <FSearch setSearch={setSearch} />
         </div>
         <div
           style={{
