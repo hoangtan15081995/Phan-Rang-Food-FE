@@ -207,8 +207,8 @@ export default function MainHeader() {
   const handleCloseUserMenu = (setting) => {
     const from = location.pathname || "/";
     switch (setting) {
-      case "Profile":
-        navigate("/profile");
+      case "Favorite":
+        navigate("/favorite");
         break;
       case "Order":
         navigate("/order");
@@ -218,7 +218,7 @@ export default function MainHeader() {
         break;
       case "Logout":
         navigate(from, { replace: true });
-        window.localStorage.removeItem("user")
+        window.localStorage.removeItem("user");
         break;
       default:
         break;
@@ -226,7 +226,7 @@ export default function MainHeader() {
     setAnchorElUser(null);
   };
 
-  const settings = ["Profile", "Order", "Logout"];
+  const settings = ["Favorite", "Order", "Logout"];
   const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
       right: -4,
@@ -284,7 +284,7 @@ export default function MainHeader() {
             <div>
               <Box
                 sx={{
-                  width: 400,
+                  width: 505,
                   // bgcolor: "background.paper",
                 }}
               >
@@ -318,9 +318,9 @@ export default function MainHeader() {
             </div>
           )}
         </div>
-        <div>
+        {location.pathname !== "/"  && location.pathname !== "/detail" &&
           <FSearch setSearch={setSearch} />
-        </div>
+        }
         <div
           style={{
             display: "flex",
@@ -330,6 +330,18 @@ export default function MainHeader() {
             // marginLeft: 250,
           }}
         >
+          {location.pathname === "/" &&
+          <IconButton
+            style={{ width: "auto", height: "auto", marginLeft: "10px" }}
+            onClick={() => {
+              navigate("/search");
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          >
+            <SearchIcon />
+          </IconButton>
+          }
+          
           <div>
             <TDrawer />
           </div>

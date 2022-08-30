@@ -104,9 +104,7 @@ export default function FCard({food}) {
               }}
             >
               <IconButton aria-label="add to card" onClick={() => setShoppingCart(!shoppingCart)}>
-                {shoppingCart ? <ShoppingCartIcon style={{ fontSize: "20px", color: "green" }} /> : <ShoppingCartIcon style={{ fontSize: "20px" }} />}
-                
-                
+                {shoppingCart ? <ShoppingCartIcon style={{ fontSize: "20px", color: "green" }} /> : <ShoppingCartIcon style={{ fontSize: "20px" }} />}          
               </IconButton>
             </div>
           </div>

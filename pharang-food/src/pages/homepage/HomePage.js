@@ -45,7 +45,7 @@ function HomePage() {
           </p>
           <ListHorizontal array={riceList} />
           <Button
-            onClick={() => navigate("/rice")}
+            onClick={() => { navigate("/rice"); window.scrollTo({top: 0, behavior: "smooth"}) }}
             style={{
               width: "100%",
               margin: 0,
@@ -79,7 +79,7 @@ function HomePage() {
           </p>
           <ListHorizontal array={riceList} />
           <Button
-            onClick={() => navigate("/noodleSoup")}
+            onClick={() => { navigate("/noodleSoup"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             style={{
               width: "100%",
               margin: 0,
@@ -113,7 +113,7 @@ function HomePage() {
           </p>
           <ListHorizontal array={riceList} />
           <Button
-            onClick={() => navigate("/porridge")}
+            onClick={() => { navigate("/porridge"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             style={{
               width: "100%",
               margin: 0,
@@ -147,7 +147,7 @@ function HomePage() {
           </p>
           <ListHorizontal array={riceList} />
           <Button
-            onClick={() => navigate("/hotpot")}
+            onClick={() => { navigate("/hotpot"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             style={{
               width: "100%",
               margin: 0,
@@ -181,7 +181,7 @@ function HomePage() {
           </p>
           <ListHorizontal array={riceList} />
           <Button
-            onClick={() => navigate("/juice")}
+            onClick={() => { navigate("/juice"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             style={{
               width: "100%",
               margin: 0,
@@ -215,7 +215,7 @@ function HomePage() {
           </p>
           <ListHorizontal array={riceList} />
           <Button
-            onClick={() => navigate("/milktea")}
+            onClick={() => { navigate("/milktea"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             style={{
               width: "100%",
               margin: 0,
@@ -250,7 +250,7 @@ function HomePage() {
           </p>
           <ListHorizontal array={riceList} />
           <Button
-            onClick={() => navigate("/coffee")}
+            onClick={() => { navigate("/coffee"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             style={{
               width: "100%",
               margin: 0,

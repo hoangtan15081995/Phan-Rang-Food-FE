@@ -9,6 +9,7 @@ import milkteaReducer from "../features/milktea/milkteaSlice";
 import coffeeReducer from "../features/coffee/coffeeSlice";
 import cartReducer from "../features/shoppingCart/shoppingCartSlice";
 import allFoodReducer from "../features/all-food/allFoodSlice";
+import foodDetailReducer from "../features/foodDetail/foodDetailSlice";
 
 export const store = configureStore({
   reducer: {
@@ -22,5 +23,6 @@ export const store = configureStore({
     coffee: coffeeReducer,
     cart: cartReducer,
     allFood: allFoodReducer,
+    foodDetail: foodDetailReducer,
   },
 });

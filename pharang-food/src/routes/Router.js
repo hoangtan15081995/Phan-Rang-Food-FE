@@ -2,8 +2,10 @@ import React from 'react';
 import { Routes, Route } from "react-router-dom";
 import BlankLayout from '../layouts/BlankLayout';
 import MainLayout from '../layouts/MainLayout';
+import CheckOutPage from '../pages/checkoutPage/CheckOutPage';
 import CoffeePage from '../pages/coffeePage/coffeePage';
 import DetailPage from '../pages/detailPage/DetailPage';
+import FavoritePage from '../pages/favoritePage/FavoritePage';
 import HomePage from '../pages/homepage/HomePage';
 import HotPotPage from '../pages/hotPotPage/hotPotPage';
 import JuicePage from '../pages/juicePage/juicePage';
@@ -32,11 +34,13 @@ function Router() {
         <Route path="/milktea" element={<MilkTeaPage />} />
         <Route path="/detail" element={<DetailPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/favorite" element={<FavoritePage />} />
         <Route path="/order" element={<OrderPage />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/checkOut" element={<CheckOutPage />} />
       </Route>
       <Route element={<BlankLayout />}>
-        <Route path="/login" element={<LoginNumberPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Route>
     </Routes>

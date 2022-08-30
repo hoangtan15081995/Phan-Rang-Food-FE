@@ -42,10 +42,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     width: "100%",
     [theme.breakpoints.up("sm")]: {
       // transition: "1s",
-      width: "20ch",
+      width: "70ch",
       "&:focus": {
-        // transition: "3s",s
-        width: "40ch",
+        // transition: "0.4s",
+        width: "70ch",
       },
     },
   },
@@ -69,7 +69,7 @@ export default function FSearch({ setSearch }) {
         <StyledInputBase
           placeholder="Search…"
           inputProps={{ "aria-label": "search" }}
-          onClick={() => { navigate("/search"); window.scrollTo({top: 0, behavior: "smooth"}) }}
+          // onClick={() => { navigate("/search"); window.scrollTo({top: 0, behavior: "smooth"}) }}
           onChange={(e) => console.log(e.target.value)}
         />
       </Search>
