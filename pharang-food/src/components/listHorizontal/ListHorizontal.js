@@ -11,7 +11,7 @@ const getItems = () =>
     .fill(0)
     .map((_, ind) => ({ id: `element-${ind}` }));
 
-function ListHorizontal({array}) {
+function ListHorizontal({ array }) {
   const [items, setItems] = React.useState(getItems);
   const [selected, setSelected] = React.useState([]);
   const [position, setPosition] = React.useState(0);
@@ -32,15 +32,13 @@ function ListHorizontal({array}) {
 
   return (
     <div className="list-horizontal">
-      <ScrollMenu
-        LeftArrow={LeftArrow}
-        RightArrow={RightArrow}
-      >
-        {array.map(({food, index }) => (
+      <ScrollMenu LeftArrow={LeftArrow} RightArrow={RightArrow}>
+        {array.map((food) => (
           <FCard
+            food={food}
             // itemId={id} // NOTE: itemId is required for track items
             // title={id}
-            key={index}
+            // key={index}
             // onClick={handleClick(id)}
             // selected={isItemSelected(id)}
           />

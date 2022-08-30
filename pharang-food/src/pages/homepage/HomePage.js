@@ -11,27 +11,13 @@ import TDrawer from '../../components/drawer';
 import FCard from '../../components/Card';
 import SyncIcon from "@mui/icons-material/Sync";
 import ListHorizontal from '../../components/listHorizontal/ListHorizontal';
+import { useDispatch, useSelector } from "react-redux";
 
 function HomePage() {
   const navigate = useNavigate();
+  const { riceList } = useSelector((state) => state.rice);
+  console.log(riceList);
 
-  const array = [
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1"
-  ];
-  let surplus = array.length % 4;
   return (
     <>
       <div id="position" className="home-page">
@@ -48,13 +34,16 @@ function HomePage() {
         >
           <p
             style={{
+              fontSize: 20,
               margin: 0,
+              marginLeft: "40px",
+              marginRight: "40px",
               // border: "1px solid black",
             }}
           >
             Cơm
           </p>
-          <ListHorizontal array={array} />
+          <ListHorizontal array={riceList} />
           <Button
             onClick={() => navigate("/rice")}
             style={{
@@ -66,7 +55,6 @@ function HomePage() {
             Xem tất cả món ăn
           </Button>
         </div>
-
         {/* div Phở  */}
         <div
           style={{
@@ -80,13 +68,16 @@ function HomePage() {
         >
           <p
             style={{
+              fontSize: 20,
               margin: 0,
+              marginLeft: "40px",
+              marginRight: "40px",
               // border: "1px solid black",
             }}
           >
             Phở
           </p>
-          <ListHorizontal array={array} />
+          <ListHorizontal array={riceList} />
           <Button
             onClick={() => navigate("/noodleSoup")}
             style={{
@@ -98,7 +89,6 @@ function HomePage() {
             Xem tất cả món ăn
           </Button>
         </div>
-
         {/* div cháo  */}
         <div
           style={{
@@ -112,13 +102,16 @@ function HomePage() {
         >
           <p
             style={{
+              fontSize: 20,
               margin: 0,
+              marginLeft: "40px",
+              marginRight: "40px",
               // border: "1px solid black",
             }}
           >
             Cháo
           </p>
-          <ListHorizontal array={array} />
+          <ListHorizontal array={riceList} />
           <Button
             onClick={() => navigate("/porridge")}
             style={{
@@ -130,7 +123,6 @@ function HomePage() {
             Xem tất cả món ăn
           </Button>
         </div>
-
         {/* div lẩu  */}
         <div
           style={{
@@ -144,13 +136,16 @@ function HomePage() {
         >
           <p
             style={{
+              fontSize: 20,
               margin: 0,
+              marginLeft: "40px",
+              marginRight: "40px",
               // border: "1px solid black",
             }}
           >
             Lẩu
           </p>
-          <ListHorizontal array={array} />
+          <ListHorizontal array={riceList} />
           <Button
             onClick={() => navigate("/hotpot")}
             style={{
@@ -162,7 +157,6 @@ function HomePage() {
             Xem tất cả món ăn
           </Button>
         </div>
-
         {/* div nước ép  */}
         <div
           style={{
@@ -176,13 +170,16 @@ function HomePage() {
         >
           <p
             style={{
+              fontSize: 20,
               margin: 0,
+              marginLeft: "40px",
+              marginRight: "40px",
               // border: "1px solid black",
             }}
           >
             Nước ép
           </p>
-          <ListHorizontal array={array} />
+          <ListHorizontal array={riceList} />
           <Button
             onClick={() => navigate("/juice")}
             style={{
@@ -194,7 +191,6 @@ function HomePage() {
             Xem tất cả món ăn
           </Button>
         </div>
-
         {/* div trà sữa  */}
         <div
           style={{
@@ -208,13 +204,16 @@ function HomePage() {
         >
           <p
             style={{
+              fontSize: 20,
               margin: 0,
+              marginLeft: "40px",
+              marginRight: "40px",
               // border: "1px solid black",
             }}
           >
             Trà sữa
           </p>
-          <ListHorizontal array={array} />
+          <ListHorizontal array={riceList} />
           <Button
             onClick={() => navigate("/milktea")}
             style={{
@@ -228,73 +227,6 @@ function HomePage() {
         </div>
 
         {/* div cà phê  */}
-        {/* <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            border: "1px solid black",
-          }}
-        >
-          <p
-            style={{
-              margin: 0,
-              border: "1px solid black",
-            }}
-          >
-            Cà phê
-          </p>
-          <div
-            style={{
-              // border: "1px solid black",
-              width: "995.140px",
-              marginTop: 50,
-              // marginBottom: 50,
-              display: "flex",
-              marginLeft: "auto",
-              marginRight: "auto",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-            }}
-          >
-            {array.map((e, index) => {
-              return <FCard key={index} />;
-            })}
-            {surplus === 3 ? (
-              <div
-                style={{ width: "210px", height: "230px", marginBottom: 5 }}
-              ></div>
-            ) : (
-              ""
-            )}
-            {surplus === 2 ? (
-              <>
-                <div
-                  style={{ width: "210px", height: "230px", marginBottom: 5 }}
-                ></div>
-                <div
-                  style={{ width: "210px", height: "230px", marginBottom: 5 }}
-                ></div>
-              </>
-            ) : (
-              ""
-            )}
-            {surplus === 1 ? (
-              <>
-                <div
-                  style={{ width: "210px", height: "230px", marginBottom: 5 }}
-                ></div>
-                <div
-                  style={{ width: "210px", height: "230px", marginBottom: 5 }}
-                ></div>
-                <div
-                  style={{ width: "210px", height: "230px", marginBottom: 5 }}
-                ></div>
-              </>
-            ) : (
-              ""
-            )}
-          </div>
-        </div> */}
         <div
           style={{
             width: "972px",
@@ -307,13 +239,16 @@ function HomePage() {
         >
           <p
             style={{
+              fontSize: 20,
               margin: 0,
+              marginLeft: "40px",
+              marginRight: "40px",
               // border: "1px solid black",
             }}
           >
             Cà phê
           </p>
-          <ListHorizontal array={array} />
+          <ListHorizontal array={riceList} />
           <Button
             onClick={() => navigate("/coffee")}
             style={{
@@ -331,3 +266,7 @@ function HomePage() {
 }
 
 export default HomePage
+
+
+
+ 

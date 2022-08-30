@@ -38,7 +38,7 @@ export default function MainHeader() {
   const [value, setValue] = useState("one");
 
   const accessToken = window.localStorage.getItem("user");
-  console.log(search)
+  // console.log(search)
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -56,18 +56,18 @@ export default function MainHeader() {
         if (scroll_y > 230) {
           setValue("two");
         }
-        if (scroll_y > 530) {
+        if (scroll_y > 540) {
           setValue("three");
         }
-        if (scroll_y > 830) {
+        if (scroll_y > 840) {
           setValue("four");
         }
-        if (scroll_y > 1130) {
+        if (scroll_y > 1140) {
           setValue("five");
-        }if (scroll_y > 1430) {
+        }if (scroll_y > 1440) {
           setValue("six");
         }
-        if (scroll_y > 1730) {
+        if (scroll_y > 1740) {
           setValue("seven");
         }
       });
@@ -141,7 +141,7 @@ export default function MainHeader() {
         // setValueTab("noodleSoup");
         // navigate("/");
         window.scrollTo({
-          top: 340.5,
+          top: 346.5,
           behavior: "smooth",
         });
         setValue("two");
@@ -151,7 +151,7 @@ export default function MainHeader() {
         // navigate("/porridge");
         // setValueTab("porridge");
         window.scrollTo({
-          top: 681,
+          top: 693,
           behavior: "smooth",
         });
         setValue("three");
@@ -161,7 +161,7 @@ export default function MainHeader() {
         // navigate("/hotpot");
         // setValueTab("hotpot");
         window.scrollTo({
-          top: 1021.5,
+          top: 1039.5,
           behavior: "smooth",
         });
         setValue("four");
@@ -171,7 +171,7 @@ export default function MainHeader() {
         // navigate("/juice");
         // setValueTab("juice");
         window.scrollTo({
-          top: 1362,
+          top: 1386,
           behavior: "smooth",
         });
         setValue("five");
@@ -181,7 +181,7 @@ export default function MainHeader() {
         // navigate("/milktea");
         // setValueTab("milktea");
         window.scrollTo({
-          top: 1702.5,
+          top: 1732.5,
           behavior: "smooth",
         });
         setValue("six");
@@ -191,7 +191,7 @@ export default function MainHeader() {
         // navigate("/coffee");
         // setValueTab("coffee");
         window.scrollTo({
-          top: 2043,
+          top: 2079,
           behavior: "smooth",
         });
         setValue("seven");
