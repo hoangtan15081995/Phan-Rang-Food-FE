@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -16,25 +16,37 @@ import FRating from './rating/Rating';
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { setFoodToCart } from "../features/shoppingCart/shoppingCartSlice";
 import { useDispatch, useSelector } from "react-redux";
+import TDrawer from './drawer';
 
 export default function FCard({food}) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [favorite, setFavorite] = useState(false);
+    // const [favorite, setFavorite] = useState(false);
+    const { cartList, clearAll } = useSelector((state) => state.cart);
     const [shoppingCart, setShoppingCart] = useState(false);
-    const handleOnclickDetail = (id) => {
+    // console.log(clearAll);
+    
+    useEffect(() => {
+      setShoppingCart(false);
+    }, [clearAll]);
+  
+     
+    
+
+    const handleOnclickDetail = (shoppingCart) => {
       navigate("/detail");
       window.scroll({
         top: 0,
-        behavior: "smooth"
-      })
+        behavior: "smooth",
+      });
     };
-    
+  
   const handleShoppingCart = (food) => {
       setShoppingCart(!shoppingCart);
       dispatch(setFoodToCart(food));
       
-    }
+  }
+  
   return (
     <Card sx={{ width: 210, height: 230, marginRight: "20px", boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px" }}>
       <CardActionArea>
@@ -113,7 +125,7 @@ export default function FCard({food}) {
               }}
             >
               <IconButton aria-label="add to card" onClick={()=>handleShoppingCart(food)}>
-                {shoppingCart ? <ShoppingCartIcon style={{ fontSize: "20px", color: "green" }} /> : <ShoppingCartIcon style={{ fontSize: "20px" }} />}          
+                {shoppingCart ? <ShoppingCartIcon style={{ fontSize: "20px", color: "green" }} /> : <ShoppingCartIcon style={{ fontSize: "20px" }} />}
               </IconButton>
             </div>
           </div>

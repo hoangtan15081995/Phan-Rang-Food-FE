@@ -22,7 +22,7 @@ function HomePage() {
   const { juiceList } = useSelector((state) => state.juice);
   const { milkteaList } = useSelector((state) => state.milktea);
   const { coffeeList } = useSelector((state) => state.coffee);
-  console.log(riceList);
+  // console.log(riceList);
 
   return (
     <>

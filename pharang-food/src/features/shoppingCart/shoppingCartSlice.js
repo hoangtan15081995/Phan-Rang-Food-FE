@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  cartList: [
-  ],
+  cartList: [],
+  clearAll: 1,
 };
 
 const slice = createSlice({
@@ -31,7 +31,29 @@ const slice = createSlice({
     },
     clearAllFoodToCartSuccess(state, action) {
       state.cartList = [];
-    }
+      state.clearAll = state.clearAll + 1;
+
+    },
+    DecreaseQuantitySuccess(state, action) {
+      // let Oncart = action.payload;
+      // let cartList = state.cartList;
+      state.cartList.forEach((cart) => {
+        if (cart.id === action.payload) {
+          return (cart.quantity -= 1);
+        }
+      });
+      // state.cartList = newCart;
+    },
+    IncreaseQuantitySuccess(state, action) {
+      // let Oncart = action.payload;
+      // let cartList = state.cartList;
+      state.cartList.forEach((cart) => {
+        if (cart.id === action.payload) {
+          return (cart.quantity += 1);
+        }
+      });
+      // state.cartList = newCart;
+    },
   },
 });
 export const setFoodToCart = (food) => async (dispatch) => {
@@ -45,6 +67,20 @@ export const setFoodToCart = (food) => async (dispatch) => {
 export const clearAllFoodToCart = () => async (dispatch) => {
   try {
     dispatch(slice.actions.clearAllFoodToCartSuccess());
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const DecreaseQuantity = (id) => async (dispatch) => {
+  try {
+    dispatch(slice.actions.DecreaseQuantitySuccess(id));
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const IncreaseQuantity = (id) => async (dispatch) => {
+  try {
+    dispatch(slice.actions.IncreaseQuantitySuccess(id));
   } catch (error) {
     console.log(error);
   }
