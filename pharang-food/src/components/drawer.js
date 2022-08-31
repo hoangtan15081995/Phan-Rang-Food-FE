@@ -11,9 +11,14 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import Badges from "./badge";
-import { IconButton } from "@mui/material";
+import { Icon, IconButton } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { clearAllFoodToCart } from "../features/shoppingCart/shoppingCartSlice";
 
 export default function TDrawer() {
+  const dispatch = useDispatch();
+  const { cartList } = useSelector((state) => state.cart);
+  const accessToken = window.localStorage.getItem("accessToken");
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -21,7 +26,16 @@ export default function TDrawer() {
     right: false,
   });
 
-  
+  const priceFormat = (price) => {
+    return `${price}.000`
+  } 
+
+  let total = 0;
+  cartList.forEach((cart) => {
+    total += Number(cart.price)
+  }
+    
+  )
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -35,12 +49,76 @@ export default function TDrawer() {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 300 }}
+      sx={{
+        width: anchor === "top" || anchor === "bottom" ? "auto" : 300,
+        height: "100vh",
+        border: "1px solid black",
+        overflowX: "hidden",
+      }}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+      // onClick={toggleDrawer(anchor, false)}
+      // onKeyDown={toggleDrawer(anchor, false)}
     >
-      {/* <List>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "space-between",
+          border: "1px solid black",
+          height: "100vh",
+          margin: "10px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
+        >
+          <IconButton
+            style={{ width: 30, height: 30 }}
+            onClick={toggleDrawer(anchor, false)}
+          >
+            x
+          </IconButton>
+          <IconButton onClick={() => dispatch(clearAllFoodToCart())}>
+            Clear All
+          </IconButton>
+        </div>
+        <div>
+          {cartList.length === 0 ? (
+            <img
+              width="200px"
+              alt="empty"
+              src="https://www.getillustrations.com/packs/matilda-startup-illustrations/scenes/_1x/shopping,%20e-commerce%20_%20empty,%20shopping%20cart,%20items,%20products,%20zero,%20none_md.png"
+            />
+          ) : (
+            <>
+              {cartList.map((cart) => (
+              <div>
+                  {cart.name} {cart.price}
+              </div>
+              ))}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
+                >
+                  <p>Tổng cộng</p>
+                  <p>{total}</p>
+              </div>
+            </>
+          )}
+        </div>
+        <Button variant="contained" color="success">
+          {" "}
+          {accessToken ? "Đặt đơn" : "Đăng nhập để đặt đơn"}{" "}
+        </Button>
+        {/* <List>
         {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
@@ -53,7 +131,7 @@ export default function TDrawer() {
         ))}
       </List>
 
-      <Divider />
+     
 
       <List>
         {["All mail", "Trash", "Spam"].map((text, index) => (
@@ -67,6 +145,7 @@ export default function TDrawer() {
           </ListItem>
         ))}
       </List> */}
+      </div>
     </Box>
   );
 

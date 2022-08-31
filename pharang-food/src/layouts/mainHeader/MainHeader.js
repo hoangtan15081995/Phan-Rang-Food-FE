@@ -37,7 +37,7 @@ export default function MainHeader() {
   const location = useLocation();
   const [value, setValue] = useState("one");
 
-  const accessToken = window.localStorage.getItem("user");
+  const accessToken = window.localStorage.getItem("accessToken");
   // console.log(search)
 
   const handleChange = (event, newValue) => {
@@ -218,7 +218,7 @@ export default function MainHeader() {
         break;
       case "Logout":
         navigate(from, { replace: true });
-        window.localStorage.removeItem("user");
+        window.localStorage.removeItem("accessToken");
         break;
       default:
         break;
@@ -226,7 +226,7 @@ export default function MainHeader() {
     setAnchorElUser(null);
   };
 
-  const settings = ["Favorite", "Order", "Logout"];
+  const settings = ["Order", "Logout"];
   const StyledBadge = styled(Badge)(({ theme }) => ({
     "& .MuiBadge-badge": {
       right: -4,

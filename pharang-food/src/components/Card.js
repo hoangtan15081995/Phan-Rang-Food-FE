@@ -14,9 +14,12 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { useNavigate } from "react-router-dom";
 import FRating from './rating/Rating';
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { setFoodToCart } from "../features/shoppingCart/shoppingCartSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function FCard({food}) {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [favorite, setFavorite] = useState(false);
     const [shoppingCart, setShoppingCart] = useState(false);
     const handleOnclickDetail = (id) => {
@@ -26,6 +29,12 @@ export default function FCard({food}) {
         behavior: "smooth"
       })
     };
+    
+  const handleShoppingCart = (food) => {
+      setShoppingCart(!shoppingCart);
+      dispatch(setFoodToCart(food));
+      
+    }
   return (
     <Card sx={{ width: 210, height: 230, marginRight: "20px", boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px" }}>
       <CardActionArea>
@@ -90,9 +99,9 @@ export default function FCard({food}) {
                 alignItems: "center",
               }}
             >
-              <IconButton aria-label="add to favorites" onClick={() => setFavorite(!favorite)}>
+              {/* <IconButton aria-label="add to favorites" onClick={() => setFavorite(!favorite)}>
                 {favorite ? <FavoriteIcon style={{ fontSize: 15, color: 'red' }} /> : <FavoriteBorderIcon style={{ fontSize: 15 }} /> }
-              </IconButton>
+              </IconButton> */}
               <FRating rating={food.rating} />
             </div>
             <div
@@ -103,7 +112,7 @@ export default function FCard({food}) {
                 alignItems: "center",
               }}
             >
-              <IconButton aria-label="add to card" onClick={() => setShoppingCart(!shoppingCart)}>
+              <IconButton aria-label="add to card" onClick={()=>handleShoppingCart(food)}>
                 {shoppingCart ? <ShoppingCartIcon style={{ fontSize: "20px", color: "green" }} /> : <ShoppingCartIcon style={{ fontSize: "20px" }} />}          
               </IconButton>
             </div>

@@ -10,9 +10,19 @@ import coffeeReducer from "../features/coffee/coffeeSlice";
 import cartReducer from "../features/shoppingCart/shoppingCartSlice";
 import allFoodReducer from "../features/all-food/allFoodSlice";
 import foodDetailReducer from "../features/foodDetail/foodDetailSlice";
+import { combineReducers } from "redux";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 
-export const store = configureStore({
-  reducer: {
+
+const persistConfig = {
+  key: "root",
+  storage: storage,
+  stateReconciler: autoMergeLevel2,
+};
+
+const reducer = combineReducers({
     location: locationReducer,
     rice: riceReducer,
     noodleSoup: noodleSoupReducer,
@@ -23,6 +33,16 @@ export const store = configureStore({
     coffee: coffeeReducer,
     cart: cartReducer,
     allFood: allFoodReducer,
-    foodDetail: foodDetailReducer,
-  },
+    foodDetail: foodDetailReducer
 });
+
+const persistedReducer = persistReducer(persistConfig, reducer);
+export const store = configureStore({
+  reducer: persistedReducer,
+});
+
+
+export const persistor = persistStore(store);
+
+
+

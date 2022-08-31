@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   coffeeList: [
-    { name: "Cơm chiên Gia Phú", catagory: "Cơm", price: "30.000", address: "30 Ngô Gia Tự thành phố Phan Rang Tháp Chàm", rating: "4", image: "https://i.ytimg.com/vi/FR4DH5sSysI/maxresdefault.jpg" },
+    { name: "Cà phê Gia Phú", catagory: "Cơm", price: "30.000", address: "30 Ngô Gia Tự thành phố Phan Rang Tháp Chàm", rating: "4", image: "https://nld.mediacdn.vn/2020/9/19/intro-1594766282-1600504778592231123885.jpg" },
     { name: "Cơm chiên Tâm Phú", catagory: "Cơm", price: "25.000", address: "40 Ngô Gia Tự thành phố Phan Rang Tháp Chàm", rating: "5", image: "http://www.nhahangquangon.com/wp-content/uploads/2021/10/com-chien-duong-chau1.jpg" },
     { name: "Cơm niêu Gia Bảo", catagory: "Cơm", price: "30.000", address: "50 Ngô Gia Tự thành phố Phan Rang Tháp Chàm", rating: "3", image: "https://www.quan33detham.vn/wp-content/uploads/2018/08/1-56.jpg" },
     { name: "Cơm chiên Vạn Phú", catagory: "Cơm", price: "30.000", address: "60 Ngô Gia Tự thành phố Phan Rang Tháp Chàm", rating: "5", image: "https://i.ytimg.com/vi/FR4DH5sSysI/maxresdefault.jpg" },

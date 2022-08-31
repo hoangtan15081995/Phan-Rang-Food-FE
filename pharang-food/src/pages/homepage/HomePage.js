@@ -16,6 +16,12 @@ import { useDispatch, useSelector } from "react-redux";
 function HomePage() {
   const navigate = useNavigate();
   const { riceList } = useSelector((state) => state.rice);
+  const { noodleSoupList } = useSelector((state) => state.noodleSoup);
+  const { porridgeList } = useSelector((state) => state.porridge);
+  const { hotpotList } = useSelector((state) => state.hotpot);
+  const { juiceList } = useSelector((state) => state.juice);
+  const { milkteaList } = useSelector((state) => state.milktea);
+  const { coffeeList } = useSelector((state) => state.coffee);
   console.log(riceList);
 
   return (
@@ -77,7 +83,7 @@ function HomePage() {
           >
             Phở
           </p>
-          <ListHorizontal array={riceList} />
+          <ListHorizontal array={noodleSoupList} />
           <Button
             onClick={() => { navigate("/noodleSoup"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             style={{
@@ -111,7 +117,7 @@ function HomePage() {
           >
             Cháo
           </p>
-          <ListHorizontal array={riceList} />
+          <ListHorizontal array={porridgeList} />
           <Button
             onClick={() => { navigate("/porridge"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             style={{
@@ -145,7 +151,7 @@ function HomePage() {
           >
             Lẩu
           </p>
-          <ListHorizontal array={riceList} />
+          <ListHorizontal array={hotpotList} />
           <Button
             onClick={() => { navigate("/hotpot"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             style={{
@@ -179,7 +185,7 @@ function HomePage() {
           >
             Nước ép
           </p>
-          <ListHorizontal array={riceList} />
+          <ListHorizontal array={juiceList} />
           <Button
             onClick={() => { navigate("/juice"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             style={{
@@ -213,7 +219,7 @@ function HomePage() {
           >
             Trà sữa
           </p>
-          <ListHorizontal array={riceList} />
+          <ListHorizontal array={milkteaList} />
           <Button
             onClick={() => { navigate("/milktea"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             style={{
@@ -248,7 +254,7 @@ function HomePage() {
           >
             Cà phê
           </p>
-          <ListHorizontal array={riceList} />
+          <ListHorizontal array={coffeeList} />
           <Button
             onClick={() => { navigate("/coffee"); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             style={{

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   milkteaList: [
-    { name: "Cơm chiên Gia Phú", catagory: "Cơm", price: "30.000", address: "30 Ngô Gia Tự thành phố Phan Rang Tháp Chàm", rating: "4", image: "https://i.ytimg.com/vi/FR4DH5sSysI/maxresdefault.jpg" },
+    { name: "Trà sữa Gia Phú", catagory: "Cơm", price: "30.000", address: "30 Ngô Gia Tự thành phố Phan Rang Tháp Chàm", rating: "4", image: "http://cdn.tgdd.vn/Files/2021/08/10/1374160/hoc-cach-pha-tra-sua-o-long-dai-loan-thom-ngon-chuan-vi-ai-cung-me-202108100039248020.jpg" },
     { name: "Cơm chiên Tâm Phú", catagory: "Cơm", price: "25.000", address: "40 Ngô Gia Tự thành phố Phan Rang Tháp Chàm", rating: "5", image: "http://www.nhahangquangon.com/wp-content/uploads/2021/10/com-chien-duong-chau1.jpg" },
     { name: "Cơm niêu Gia Bảo", catagory: "Cơm", price: "30.000", address: "50 Ngô Gia Tự thành phố Phan Rang Tháp Chàm", rating: "3", image: "https://www.quan33detham.vn/wp-content/uploads/2018/08/1-56.jpg" },
     { name: "Cơm chiên Vạn Phú", catagory: "Cơm", price: "30.000", address: "60 Ngô Gia Tự thành phố Phan Rang Tháp Chàm", rating: "5", image: "https://i.ytimg.com/vi/FR4DH5sSysI/maxresdefault.jpg" },

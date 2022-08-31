@@ -51,7 +51,7 @@ function LoginPage() {
           const user = userCredential.user;
           // console.log(user.accessToken);
           setError(false);
-          window.localStorage.setItem("user", user.accessToken);
+          window.localStorage.setItem("accessToken", user.accessToken);
           navigate("/");
         })
         .catch((error) => {
@@ -139,7 +139,7 @@ function LoginPage() {
         >
           <Button
             id="sign-in-button"
-            onClick={onSignInSubmit}
+            // onClick={onSignInSubmit}
             style={{
               height: "25px",
               marginBottom: "5px",
