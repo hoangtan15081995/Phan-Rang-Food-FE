@@ -12,7 +12,7 @@ const SearchPage = () => {
     <div className="search-page">
       <div
         style={{
-          border: "1px solid black",
+          // border: "1px solid black",
           width: "100%",
           display: "flex",
           flexWrap: "wrap",
@@ -57,7 +57,7 @@ const SearchPage = () => {
           ""
         )}
       </div>
-      <div
+      {/* <div
         style={{
           border: "1px solid black",
           width: "100%",
@@ -67,7 +67,7 @@ const SearchPage = () => {
         <Button>
           Xem thêm <SyncIcon />
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };

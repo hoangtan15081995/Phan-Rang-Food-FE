@@ -1,5 +1,6 @@
 .profile-page {
-  margin-top: 70px;
-  height: 100vh;
+  margin-top: 90px;
+  min-height: 100vh;
+  padding: 20px 300px;
   background-color: rgb(238, 182, 182);
 }

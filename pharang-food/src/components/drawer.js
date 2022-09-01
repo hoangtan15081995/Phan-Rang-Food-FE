@@ -20,9 +20,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FCard from "./Card";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import { useNavigate } from "react-router-dom";
 
 export default function TDrawer() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { cartList } = useSelector((state) => state.cart);
   const accessToken = window.localStorage.getItem("accessToken");
   // const [quantity, setQuantity] = useState(1);
@@ -41,13 +43,12 @@ export default function TDrawer() {
   const handleDecrease = (id) => {
     dispatch(DecreaseQuantity(id));
   }
-
     const handleIncrease = (id) => {
     dispatch(IncreaseQuantity(id));
   }
 
   cartList && cartList.forEach((cart) => {
-    total += Number(cart.price);
+    total += Number(cart.price * cart.quantity);
   });
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -60,10 +61,26 @@ export default function TDrawer() {
     setState({ ...state, [anchor]: open });
   };
 
+  const toggleDrawerAndToCheckOut = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+    accessToken ? navigate("/checkout") : navigate("/login");
+    
+  };
+
+  const handleCheckout = () => {
+    navigate("/checkout")
+  }
   const list = (anchor) => (
     <Box
       sx={{
-        width: anchor === "top" || anchor === "bottom" ? "auto" : 300,
+        width: anchor === "top" || anchor === "bottom" ? "auto" : 600,
         height: "100vh",
         // border: "1px solid black",
         overflowX: "hidden",
@@ -94,32 +111,33 @@ export default function TDrawer() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            width: "300px",
-            height: "50px",
+            width: "600px",
+            height: "90px",
             padding: 10,
             backgroundColor: "white",
+            boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
           }}
         >
           <IconButton
-            style={{ width: 30, height: 30 }}
+            style={{ width: "auto", height: "auto" }}
             onClick={toggleDrawer(anchor, false)}
           >
-            <ClearIcon style={{ fontSize: 20 }} />
+            <ClearIcon style={{ fontSize: 30 }} />
           </IconButton>
-          <p style={{ fontSize: 14, margin: 0 }}>Giỏ đồ ăn</p>
+          <p style={{ fontSize: 25, margin: 0 }}>Giỏ đồ ăn</p>
           <IconButton
-            style={{ width: 30, height: 30 }}
+            style={{ width: "auto", height: "auto" }}
             onClick={() => {
               dispatch(clearAllFoodToCart());
             }}
           >
             {/* <p style={{ fontSize: 15, margin: 0, color: "red" }}>Clear</p> */}
-            <DeleteIcon style={{ color: "red", fontSize: 20 }} />
+            <DeleteIcon style={{ color: "red", fontSize: 30 }} />
           </IconButton>
         </div>
         <div
           style={{
-            marginTop: 50,
+            marginTop: 90,
             // border: "1px solid black",
             width: "100%",
             backgroundColor: "rgb(248, 247, 247)",
@@ -131,12 +149,13 @@ export default function TDrawer() {
               style={{
                 display: "flex",
                 alignItems: "center",
-                height: "463.71px",
+                height: "727px",
+                // border: "1px solid black",
                 justifyContent: "center",
               }}
             >
               <img
-                width="200px"
+                width="500px"
                 alt="empty"
                 src="https://www.getillustrations.com/packs/matilda-startup-illustrations/scenes/_1x/shopping,%20e-commerce%20_%20empty,%20shopping%20cart,%20items,%20products,%20zero,%20none_md.png"
               />
@@ -151,6 +170,7 @@ export default function TDrawer() {
                       display: "flex",
                       flexDirection: "row",
                       alignItems: "center",
+                      height: 90
                       // justifyContent: "space-between",
                     }}
                   >
@@ -161,20 +181,28 @@ export default function TDrawer() {
                         flexDirection: "row",
                         justifyContent: "space-around",
                         alignItems: "center",
-                        width: 60,
+                        width: 90,
                       }}
                     >
                       <div>
-                        <IconButton onClick={()=>handleDecrease(cart.id)} style={{ width: 5, height: 5 }}>
-                          <RemoveIcon style={{ fontSize: 10 }} />
+                        <IconButton
+                          onClick={() => handleDecrease(cart.id)}
+                          style={{ width: "auto", height: "auto" }}
+                        >
+                          <RemoveIcon style={{ fontSize: 20 }} />
                         </IconButton>
                       </div>
                       <div>
-                        <p style={{ fontSize: 10, margin: 0 }}>{cart.quantity}</p>
+                        <p style={{ fontSize: 15, margin: 0 }}>
+                          {cart.quantity}
+                        </p>
                       </div>
                       <div>
-                        <IconButton onClick={()=>handleIncrease(cart.id)} style={{ width: 5, height: 5 }}>
-                          <AddIcon style={{ fontSize: 10 }} />
+                        <IconButton
+                          onClick={() => handleIncrease(cart.id)}
+                          style={{ width: "auto", height: "auto" }}
+                        >
+                          <AddIcon style={{ fontSize: 20 }} />
                         </IconButton>
                       </div>
                     </div>
@@ -183,43 +211,47 @@ export default function TDrawer() {
                         display: "flex",
                         // border: "1px solid black",
                         alignItems: "center",
-                        width: 180,
-                        height: 50,
+                        width: 400,
+                        height: 90,
                       }}
                     >
                       <div
                         style={{
-                          width: 50,
-                          height: 50,
+                          // width: 50,
+                          // height: 50,
                           // border: "1px solid black",
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
+                          marginRight: 15
                         }}
                       >
-                        <img width="45px" height="40px" src={cart.image} />
+                        <img width="60px" height="60px" src={cart.image} />
                       </div>
                       <div
                         style={{
                           // width: 50,
                           // height: 50,
                           // border: "1px solid black",
-                          width: "130px",
+                          // width: "130px",
                         }}
                       >
-                        <p style={{ fontSize: 10 }}>{cart.name}</p>
+                        <p style={{ fontSize: 16 }}>{cart.name}</p>
                       </div>
                     </div>
                     <div
                       style={{
-                        fontSize: 10,
-                        width: "70px",
+                        // fontSize: 10,
+                        width: "100px",
                         // border: "1px solid black",
                         display: "flex",
                         justifyContent: "end",
+                        paddingRight: 15
                       }}
                     >
-                      <p style={{ fontSize: 10 }}>{cart.price}</p>
+                      <p style={{ fontSize: 15 }}>
+                        {cart.price * cart.quantity}
+                      </p>
                     </div>
                   </div>
                   <Divider />
@@ -236,12 +268,13 @@ export default function TDrawer() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            width: "300px",
+            width: "600px",
             bottom: "0px",
-            height: 80,
+            height: 150,
             zIndex: 100,
             right: 0,
             backgroundColor: "white",
+            boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
           }}
         >
           <div
@@ -250,33 +283,46 @@ export default function TDrawer() {
               justifyContent: "space-between",
               width: "100%",
               // border: "1px solid black",
-              height: 40,
+              height: 75,
               alignItems: "center",
-              paddingRight: 100,
-              paddingLeft: 10,
+              paddingRight: 20,
+              paddingLeft: 20,
             }}
           >
-            <p style={{ fontSize: 14 }}>Tổng cộng</p>
-            <p style={{ fontSize: 14 }}>{total}</p>
+            <p style={{ fontSize: 25 }}>Tổng cộng</p>
+            <div
+              style={{
+                // display: "flex",
+                // justifyContent: "space-between",
+                width: "280px",
+                // border: "1px solid black",
+                height: 75,
+                textAlign: "end",
+                // alignItems: "center"
+              }}
+            >
+              <p style={{ fontSize: 22 }}>{total}</p>
+            </div>
           </div>
           <div
             style={{
               // border: "1px solid black",
-              height: 40,
+              height: 75,
               display: "flex",
               justifyContent: "center",
               alignItems: "start",
             }}
           >
             <Button
+              onClick={toggleDrawerAndToCheckOut(anchor, false)}
               variant="contained"
               color="success"
-              style={{ width: "280px", height: 25 }}
+              style={{ width: "560px", height: 45 }}
             >
               {accessToken ? (
-                <p style={{ fontSize: 12 }}>Đặt đơn</p>
+                <p style={{ fontSize: 16 }}>Đặt đơn</p>
               ) : (
-                <p style={{ fontSize: 12 }}>Đăng nhập để đặt đơn</p>
+                <p style={{ fontSize: 16 }}>Đăng nhập để đặt đơn</p>
               )}
             </Button>
           </div>
@@ -317,7 +363,7 @@ export default function TDrawer() {
       {["right"].map((anchor) => (
         <React.Fragment key={anchor}>
           <IconButton
-            style={{ width: "30px", height: "30px" }}
+            style={{ width: "auto", height: "auto" }}
             onClick={toggleDrawer(anchor, true)}
           >
             {/* {anchor} */}

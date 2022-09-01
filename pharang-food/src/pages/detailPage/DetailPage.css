@@ -1,9 +1,10 @@
 .detail-page {
-  margin-top: 70px;
-  height: 100vh;
+  margin-top: 90px;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
   /* align-items: center; */
-  padding: 40px;
+  /* padding: 40px; */
   background-color: rgb(248, 247, 247);
 }

@@ -113,7 +113,7 @@ function LoginPage() {
             textAlign: "center",
           }}
         >
-          Đăng nhập
+          <p style={{fontSize: 27, margin:6}}>Đăng nhập</p>
           <div
             style={{
               // border: "1px solid black",
@@ -123,9 +123,9 @@ function LoginPage() {
               justifyContent: "center",
             }}
           >
-            <p style={{ fontSize: "7px" }}>Bạn chưa có tài khoản?</p>
+            <p style={{ fontSize: "14px", margin: 0 }}>Bạn chưa có tài khoản?</p>
             <Link to="/register">
-              <p style={{ fontSize: "7px" }}>Đăng ký</p>
+              <p style={{ fontSize: "14px", margin: 0 }}>Đăng ký</p>
             </Link>
           </div>
         </div>
@@ -141,7 +141,7 @@ function LoginPage() {
             id="sign-in-button"
             // onClick={onSignInSubmit}
             style={{
-              height: "25px",
+              height: "40px",
               marginBottom: "5px",
               display: "flex",
               justifyContent: "space-between",
@@ -150,12 +150,12 @@ function LoginPage() {
             variant="contained"
           >
             <PhoneIphoneIcon style={{ color: "white", fontSize: "18px" }} />
-            <p style={{ fontSize: "11px" }}>Số điện thoại</p>
+            <p style={{ fontSize: "14px" }}>Số điện thoại</p>
             <div style={{ width: "10px" }}></div>
           </Button>
           <Button
             style={{
-              height: "25px",
+              height: "40px",
               marginBottom: "5px",
               display: "flex",
               justifyContent: "space-between",
@@ -166,12 +166,12 @@ function LoginPage() {
             <FacebookOutlinedIcon
               style={{ color: "white", fontSize: "18px" }}
             />
-            <p style={{ fontSize: "11px" }}>Facebook</p>
+            <p style={{ fontSize: "14px" }}>Facebook</p>
             <div style={{ width: "10px" }}></div>
           </Button>
           <Button
             style={{
-              height: "25px",
+              height: "40px",
               marginBottom: "5px",
               display: "flex",
               justifyContent: "space-between",
@@ -180,7 +180,7 @@ function LoginPage() {
             variant="contained"
           >
             <GoogleIcon style={{ color: "white", fontSize: "18px" }} />
-            <p style={{ fontSize: "11px" }}>Google</p>
+            <p style={{ fontSize: "14px" }}>Google</p>
             <div style={{ width: "10px" }}></div>
           </Button>
         </div>
@@ -191,7 +191,7 @@ function LoginPage() {
             textAlign: "center",
           }}
         >
-          <p style={{ fontSize: "8px" }}>
+          <p style={{ fontSize: "14px" }}>
             Hoặc đăng nhập bằng tài khoản của bạn
           </p>
         </div>
@@ -208,6 +208,7 @@ function LoginPage() {
           <div
             style={{
               height: "50px",
+              marginBottom: 20
               // border: "1px solid black",
               // display: "flex",
               // flexDirection: "column"
@@ -218,13 +219,13 @@ function LoginPage() {
               control={control}
               render={({ field }) => (
                 <Input
-                  style={{ width: "230px" }}
+                  style={{ width: "300px" }}
                   {...field}
                   placeholder="Email"
                 />
               )}
             />
-            <p style={{ color: "red", fontSize: "7px" }}>
+            <p style={{ color: "red", fontSize: "14px" }}>
               {errors.email?.message}
             </p>
           </div>
@@ -242,7 +243,7 @@ function LoginPage() {
               render={({ field }) => (
                 <Input
                   {...field}
-                  style={{ width: "230px" }}
+                  style={{ width: "300px" }}
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
                   endAdornment={
@@ -267,12 +268,12 @@ function LoginPage() {
                 />
               )}
             />
-            <p style={{ color: "red", fontSize: "7px" }}>
+            <p style={{ color: "red", fontSize: "14px" }}>
               {errors.password?.message}
             </p>
           </div>
           {error ? (
-            <p style={{ color: "red", fontSize: "9px", margin: 0 }}>
+            <p style={{ color: "red", fontSize: "14px", margin: 14 }}>
               Wrong email or password
             </p>
           ) : (
@@ -289,16 +290,16 @@ function LoginPage() {
               }}
             >
               <Checkbox label="check box" size="small" checked={true} />
-              <p style={{ fontSize: "10px" }}>Lưu tài khoản</p>
+              <p style={{ fontSize: "15px" }}>Lưu tài khoản</p>
             </div>
             <Link to="/register">
-              <p style={{ fontSize: "10px", marginRight: "15px" }}>
+              <p style={{ fontSize: "15px", marginRight: "15px" }}>
                 Quên mật khẩu?
               </p>
             </Link>
           </div>
         </div>
-        <div style={{ width: "100%" }}>
+        <div style={{ width: "30%" }}>
           {" "}
           <LoadingButton
             fullWidth

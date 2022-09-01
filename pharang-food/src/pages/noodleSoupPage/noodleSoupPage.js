@@ -23,7 +23,7 @@ const NoodleSoupPage = () => {
       </p>
       <div
         style={{
-          border: "1px solid black",
+          // border: "1px solid black",
           width: "100%",
           display: "flex",
           flexWrap: "wrap",
@@ -68,7 +68,7 @@ const NoodleSoupPage = () => {
           ""
         )}
       </div>
-      <div
+      {/* <div
         style={{
           border: "1px solid black",
           width: "100%",
@@ -78,7 +78,7 @@ const NoodleSoupPage = () => {
         <Button>
           Xem thêm <SyncIcon />
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   cartList: [],
-  clearAll: 1,
+  // clearAll: 1,
 };
 
 const slice = createSlice({
@@ -31,16 +31,25 @@ const slice = createSlice({
     },
     clearAllFoodToCartSuccess(state, action) {
       state.cartList = [];
-      state.clearAll = state.clearAll + 1;
+      // state.clearAll = state.clearAll + 1;
 
     },
     DecreaseQuantitySuccess(state, action) {
       // let Oncart = action.payload;
-      // let cartList = state.cartList;
+      let cartList = state.cartList;
       state.cartList.forEach((cart) => {
         if (cart.id === action.payload) {
-          return (cart.quantity -= 1);
-        }
+          if (cart.quantity === 1) {
+           let indexQuantity = cartList.findIndex(
+             (cart) => cart.id === action.payload
+           );
+           cartList.splice(indexQuantity, 1);
+           state.cartList = cartList;
+          } else {  
+            return (cart.quantity -= 1);
+         }
+        } 
+         
       });
       // state.cartList = newCart;
     },
@@ -54,6 +63,7 @@ const slice = createSlice({
       });
       // state.cartList = newCart;
     },
+
   },
 });
 export const setFoodToCart = (food) => async (dispatch) => {

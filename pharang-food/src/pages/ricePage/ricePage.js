@@ -23,7 +23,7 @@ const RicePage = () => {
       </p>
       <div
         style={{
-          border: "1px solid black",
+          // border: "1px solid black",
           width: "100%",
           display: "flex",
           flexWrap: "wrap",
@@ -68,7 +68,7 @@ const RicePage = () => {
           ""
         )}
       </div>
-      <div
+      {/* <div
         style={{
           border: "1px solid black",
           width: "100%",
@@ -78,7 +78,7 @@ const RicePage = () => {
         <Button>
           Xem thêm <SyncIcon />
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 }

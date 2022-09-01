@@ -37,7 +37,7 @@ function Router() {
         <Route path="/favorite" element={<FavoritePage />} />
         <Route path="/order" element={<OrderPage />} />
         <Route path="/search" element={<SearchPage />} />
-        <Route path="/checkOut" element={<CheckOutPage />} />
+        <Route path="/checkout" element={<CheckOutPage />} />
       </Route>
       <Route element={<BlankLayout />}>
         <Route path="/login" element={<LoginPage />} />

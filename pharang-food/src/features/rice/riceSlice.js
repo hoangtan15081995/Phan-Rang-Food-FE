@@ -16,7 +16,7 @@ const initialState = {
     { id: "cơm11", quantity: 1, name: "Cơm chiên Gia Phú 7", catagory: "Cơm", price: "30.000", address: "50 Thống Nhất thành phố Phan Rang Tháp Chàm", rating: "5", image: "https://bazantravel.com/cdn/medias/uploads/35/35019-com-rang-trung-quoc.png" },
     { id: "cơm12", quantity: 1,name: "Cơm chiên Gia Phú 8", catagory: "Cơm", price: "30.000", address: "60 Thống Nhất thành phố Phan Rang Tháp Chàm", rating: "3", image: "https://bazantravel.com/cdn/medias/uploads/28/28679-com-chien-duong-chau-700x392.jpg" },
     { id: "cơm13", quantity: 1,name: "Cơm chiên Gia Phú 9", catagory: "Cơm", price: "30.000", address: "70 Thống Nhất thành phố Phan Rang Tháp Chàm", rating: "4", image: "https://i.ytimg.com/vi/DjaRMcj_STU/maxresdefault.jpg" },
-    { id: "cơm14", quantity: 1,name: "Cơm chiên Gia Phú 10", catagory: "Cơm", price: "30.000", address: "80 Thống Nhất thành phố Phan Rang Tháp Chàm", rating: "5", image: "https://cdn.beptruong.edu.vn/wp-content/uploads/2018/11/com-chien-duong-chau.jpg" },
+    // { id: "cơm14", quantity: 1,name: "Cơm chiên Gia Phú 10", catagory: "Cơm", price: "30.000", address: "80 Thống Nhất thành phố Phan Rang Tháp Chàm", rating: "5", image: "https://cdn.beptruong.edu.vn/wp-content/uploads/2018/11/com-chien-duong-chau.jpg" },
   ],
 };
 

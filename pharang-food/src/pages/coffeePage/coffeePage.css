@@ -1,5 +1,6 @@
 .coffee-page {
   margin-top: 70px;
-  height: 100vh;
+  min-height: 100vh;
+  padding: 20px 500px;
   background-color: rgb(238, 182, 182);
 }

@@ -246,7 +246,7 @@ export default function MainHeader() {
               alignItems: "center",
               // border: "1px solid black",
               height: 50,
-              width: 100,
+              width: 150,
             }}
           >
             <IconButton
@@ -264,27 +264,18 @@ export default function MainHeader() {
                 whileTap={{ scale: 1 }}
                 src={ninhthuan}
                 alt="logo"
-                width="35px"
-                height="35px"
+                width="50px"
+                height="50px"
               />
             </IconButton>
-            <h6>85 Food</h6>
+            <h5>85 Food</h5>
           </div>
-          {/* <div
-            style={{
-              width: 135,
-              display: "flex",
-              justifyContent: "center",
-              // border: "1px solid black",
-            }}
-          >
-            <SelectMenu />
-          </div> */}
+
           {location.pathname === "/" && (
             <div>
               <Box
                 sx={{
-                  width: 505,
+                  width: 500,
                   // bgcolor: "background.paper",
                 }}
               >
@@ -318,30 +309,34 @@ export default function MainHeader() {
             </div>
           )}
         </div>
-        {location.pathname !== "/"  && location.pathname !== "/detail" &&
-          <FSearch setSearch={setSearch} />
-        }
+        {location.pathname !== "/" &&
+          location.pathname !== "/detail" &&
+          location.pathname !== "/checkout" &&
+          location.pathname !== "/order" && (
+            <FSearch setSearch={setSearch} />
+          )}
         <div
           style={{
             display: "flex",
             alignItems: "center",
+            justifyContent: "center",
             // border: "1px solid black",
             // marginRight: pdr ? "10px" : "0px",
             // marginLeft: 250,
           }}
         >
-          {location.pathname === "/" &&
-          <IconButton
-            style={{ width: "auto", height: "auto", marginLeft: "10px" }}
-            onClick={() => {
-              navigate("/search");
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-          >
-            <SearchIcon />
-          </IconButton>
-          }
-          
+          {location.pathname === "/" && (
+            <IconButton
+              style={{ width: "auto", height: "auto", marginLeft: "10px" }}
+              onClick={() => {
+                navigate("/search");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            >
+              <SearchIcon style={{ fontSize: "30px" }} />
+            </IconButton>
+          )}
+
           <div>
             <TDrawer />
           </div>
@@ -356,13 +351,13 @@ export default function MainHeader() {
                   whileTap={{ scale: 0.8 }}
                   alt="userProfile"
                   src={avatar}
-                  width="35px"
-                  height="35px"
+                  width="45px"
+                  height="45px"
                 />
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: "40px" }}
+              sx={{ mt: "50px" }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
