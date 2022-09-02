@@ -1,0 +1,17 @@
+.combo-box {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.wrap-box {
+  position: relative;
+  padding: 1rem 1.5rem;
+  border-radius: 6.25rem;
+  font-size: 1rem;
+  font-weight: 500;
+ }
+
+ .wrap-box-active {
+   background: color(white);
+   border: 1px solid color(color-e6e6e6);
+ }

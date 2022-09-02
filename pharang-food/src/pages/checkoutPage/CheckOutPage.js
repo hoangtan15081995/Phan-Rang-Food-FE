@@ -1,23 +1,80 @@
-import { Divider, IconButton } from '@mui/material';
-import React from 'react';
+import { Divider, IconButton, TextField } from '@mui/material';
+import React, {useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DecreaseQuantity, IncreaseQuantity } from "../../features/shoppingCart/shoppingCartSlice";
 import "./CheckOutPage.css";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import CommonComboBox from '../../components/selectInput/CommonComboBox';
+import InputDrop from '../../components/InputDrop/InputDrop';
+import { useTheme } from "@mui/material/styles";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import ProvinceData from "../../Config/provinces";
+import DistrictData from "../../Config/districts";
+import WardData from "../../Config/wards";
+import FullProvinceData from "../../Config/vietnam-provinces.json"
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+function getStyles(name, personName, theme) {
+  return {
+    fontWeight:
+      personName.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}
 
 const CheckOutPage = () => {
+
+  
   const dispatch = useDispatch();
+  const [province, setProvince] = useState("");
+  const [district, setDistrict] = useState("");
+  const [ward, setWard] = useState("");
+  let districtCurrent = FullProvinceData.find(
+    (fullProvince) => fullProvince.name === province
+  );
+  console.log(province);
+  console.log(districtCurrent);
+  // console.log(districtCurrent.districts || []);
+
   const { cartList } = useSelector((state) => state.cart);
-    let total = 0;
-    const handleDecrease = (id) => {
+  const theme = useTheme();
+
+  const handleProvince = (event) => {
+    // console.log(event);
+      setProvince(event.target.value);
+  };
+    const handleDistrict = (event) => {
+      setDistrict(event.target.value);
+  };
+  const handleWard = (event) => {
+      setWard(event.target.value);
+  };
+
+  let total = 0;
+  const handleDecrease = (id) => {
       dispatch(DecreaseQuantity(id));
-    };
-    const handleIncrease = (id) => {
+  };
+  const handleIncrease = (id) => {
       dispatch(IncreaseQuantity(id));
     };
 
-    cartList &&
+  cartList &&
       cartList.forEach((cart) => {
         total += Number(cart.price * cart.quantity);
       });
@@ -30,13 +87,147 @@ const CheckOutPage = () => {
           <div style={{ width: 600, height: 30, textAlign: "start" }}>
             <p style={{ margin: 10 }}>Địa chỉ nhận hàng</p>
           </div>
-          <div style={{ width: 600, minHeight: 400, display: "flex", flexDirection: "column" }}>
-            <input></input>
-            <input></input>
-            <input></input>
-            <input></input>
-            <input></input>
-          </div>
+          <form>
+            <div
+              style={{
+                width: 600,
+                minHeight: 400,
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
+              <div
+                style={{
+                  marginTop: 15,
+                  width: 600,
+                  border: "1px solid black",
+                  // minHeight: 400,
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                }}
+              >
+                <TextField
+                  style={{ width: 285 }}
+                  id="outlined-basic"
+                  label="Tên"
+                  variant="outlined"
+                />
+                <TextField
+                  style={{ width: 285 }}
+                  id="outlined-basic"
+                  label="Số điện thoại"
+                  variant="outlined"
+                />
+              </div>
+              <div
+                style={{
+                  marginTop: 15,
+                  width: 600,
+                  border: "1px solid black",
+                  // minHeight: 400,
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                }}
+              >
+                {/* <InputDrop /> */}
+                <div>
+                  <FormControl sx={{ width: 285 }}>
+                    <InputLabel id="province-label">Tỉnh, thành phố</InputLabel>
+                    <Select
+                      labelId="province-label"
+                      id="province-name"
+                      value={province}
+                      onChange={(event) => handleProvince(event)}
+                      input={<OutlinedInput label="Tỉnh, thành phố" />}
+                      MenuProps={MenuProps}
+                    >
+                      {FullProvinceData.map((province) => (
+                        <MenuItem
+                          key={province.codename}
+                          value={province.name}
+                          // style={getStyles(name, personName, theme)}
+                        >
+                          {province.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </div>
+                {/* <InputDrop /> */}
+                <div>
+                  <FormControl sx={{ width: 285 }}>
+                    <InputLabel id="district-label">quận, huyện</InputLabel>
+                    <Select
+                      // disabled={true}
+                      labelId="district-label"
+                      id="district-name"
+                      value={district}
+                      onChange={(event) => handleDistrict(event)}
+                      input={<OutlinedInput label="quận, huyện" />}
+                      MenuProps={MenuProps}
+                    >
+                      {districtCurrent && districtCurrent.districts &&  districtCurrent.districts.map(
+                        (district) => (
+                          <MenuItem
+                            key={district.codename}
+                            value={district.name}
+                            // style={getStyles(name, personName, theme)}
+                          >
+                            {district.name}
+                          </MenuItem>
+                        )
+                      )}
+                    </Select>
+                  </FormControl>
+                </div>
+              </div>
+              <div
+                style={{
+                  marginTop: 15,
+                  width: 600,
+                  border: "1px solid black",
+                  // minHeight: 400,
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                }}
+              >
+                {/* <InputDrop /> */}
+                <div>
+                  <FormControl sx={{ width: 285 }}>
+                    <InputLabel id="ward-label">xã, phường</InputLabel>
+                    <Select
+                      disabled={true}
+                      labelId="ward-label"
+                      id="ward-name"
+                      value={ward}
+                      onChange={(event) => handleWard(event)}
+                      input={<OutlinedInput label="xã, phường" />}
+                      MenuProps={MenuProps}
+                    >
+                      {WardData.map((ward) => (
+                        <MenuItem
+                          key={ward.codename}
+                          value={ward.name}
+                          // style={getStyles(name, personName, theme)}
+                        >
+                          {ward.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </div>
+                <TextField
+                  style={{ width: 285 }}
+                  id="outlined-basic"
+                  label="tên đường, số nhà"
+                  variant="outlined"
+                />
+              </div>
+            </div>
+          </form>
         </div>
         <Divider />
         <div style={{ minHeight: 200, border: "1px solid black" }}>
@@ -149,7 +340,7 @@ const CheckOutPage = () => {
 
       <div
         style={{
-          width: "100%",
+          width: 1920,
           height: 90,
           backgroundColor: "white",
           position: "fixed",
