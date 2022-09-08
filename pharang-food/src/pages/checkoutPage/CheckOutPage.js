@@ -1,4 +1,4 @@
-import { Divider, IconButton, TextField } from '@mui/material';
+import { Button, Divider, IconButton, TextField } from '@mui/material';
 import React, {useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { DecreaseQuantity, IncreaseQuantity } from "../../features/shoppingCart/shoppingCartSlice";
@@ -17,6 +17,10 @@ import ProvinceData from "../../Config/provinces";
 import DistrictData from "../../Config/districts";
 import WardData from "../../Config/wards";
 import FullProvinceData from "../../Config/vietnam-provinces.json"
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -38,19 +42,60 @@ function getStyles(name, personName, theme) {
   };
 }
 
-const CheckOutPage = () => {
+const phoneRegExp = /([0]{1})([1-9]{1})([0-9]{8})/;
 
-  
+const CheckOutSchema = yup.object().shape({
+  name: yup.string().required("Name is required"),
+  phone: yup
+    .string()
+    .matches(phoneRegExp, "Phone number is not valid")
+    .max(10)
+    .required("Phone is required"),
+  province: yup.string().required("Province is required"),
+  district: yup.string().required("District is required"),
+  ward: yup.string().required("Ward is required"),
+  address: yup.string().required("Address is required"),
+});
+
+const CheckOutPage = () => {
+  const defaultValues = {
+    name: "",
+    phone: "",
+    province: "",
+    district: "",
+    ward: "",
+    address:""
+  };
+   const {
+     control,
+     handleSubmit,
+     register,
+     formState: { errors, isSubmitting },
+   } = useForm({
+     resolver: yupResolver(CheckOutSchema),
+     defaultValues
+   });
+  console.log(errors);
+  const onSubmit = (data) => console.log(data);
   const dispatch = useDispatch();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [province, setProvince] = useState("");
   const [district, setDistrict] = useState("");
   const [ward, setWard] = useState("");
+  const [address, setAddress] = useState("");
+
   let districtCurrent = FullProvinceData.find(
     (fullProvince) => fullProvince.name === province
   );
-  console.log(province);
-  console.log(districtCurrent);
-  // console.log(districtCurrent.districts || []);
+
+ let wardCurrent = districtCurrent && districtCurrent.districts &&  districtCurrent.districts.find(
+    (fullDistrict) => fullDistrict.name === district
+  );
+
+  // console.log(province);
+  // console.log(districtCurrent);
+  // console.log(wardCurrent);
 
   const { cartList } = useSelector((state) => state.cart);
   const theme = useTheme();
@@ -82,16 +127,16 @@ const CheckOutPage = () => {
     <div className="checkout-page">
       <div className="checkout-info">
         <p style={{ fontSize: 25, margin: 10 }}>Thanh toán</p>
-        <Divider />
+        <Divider variant="middle" />
         <div style={{ height: 400 }}>
           <div style={{ width: 600, height: 30, textAlign: "start" }}>
             <p style={{ margin: 10 }}>Địa chỉ nhận hàng</p>
           </div>
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div
               style={{
                 width: 600,
-                minHeight: 400,
+                // minHeight: 400,
                 display: "flex",
                 flexDirection: "column",
               }}
@@ -100,31 +145,43 @@ const CheckOutPage = () => {
                 style={{
                   marginTop: 15,
                   width: 600,
-                  border: "1px solid black",
+                  // border: "1px solid black",
                   // minHeight: 400,
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "space-around",
                 }}
               >
-                <TextField
-                  style={{ width: 285 }}
-                  id="outlined-basic"
-                  label="Tên"
-                  variant="outlined"
-                />
-                <TextField
-                  style={{ width: 285 }}
-                  id="outlined-basic"
-                  label="Số điện thoại"
-                  variant="outlined"
-                />
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <TextField
+                    {...register("name")}
+                    style={{ width: 285 }}
+                    id="outlined-basic"
+                    label="Tên"
+                    variant="outlined"
+                  />
+                  <p style={{ color: "red", fontSize: "14px" }}>
+                    {errors.name?.message}
+                  </p>
+                </div>
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <TextField
+                    {...register("phone")}
+                    style={{ width: 285 }}
+                    id="outlined-basic"
+                    label="Số điện thoại"
+                    variant="outlined"
+                  />
+                  <p style={{ color: "red", fontSize: "14px" }}>
+                    {errors.phone?.message}
+                  </p>
+                </div>
               </div>
               <div
                 style={{
                   marginTop: 15,
                   width: 600,
-                  border: "1px solid black",
+                  // border: "1px solid black",
                   // minHeight: 400,
                   display: "flex",
                   flexDirection: "row",
@@ -136,6 +193,7 @@ const CheckOutPage = () => {
                   <FormControl sx={{ width: 285 }}>
                     <InputLabel id="province-label">Tỉnh, thành phố</InputLabel>
                     <Select
+                      {...register("province")}
                       labelId="province-label"
                       id="province-name"
                       value={province}
@@ -153,6 +211,9 @@ const CheckOutPage = () => {
                         </MenuItem>
                       ))}
                     </Select>
+                    <p style={{ color: "red", fontSize: "14px" }}>
+                      {province ? "" : errors.province?.message}
+                    </p>
                   </FormControl>
                 </div>
                 {/* <InputDrop /> */}
@@ -160,6 +221,7 @@ const CheckOutPage = () => {
                   <FormControl sx={{ width: 285 }}>
                     <InputLabel id="district-label">quận, huyện</InputLabel>
                     <Select
+                      {...register("district")}
                       // disabled={true}
                       labelId="district-label"
                       id="district-name"
@@ -168,8 +230,9 @@ const CheckOutPage = () => {
                       input={<OutlinedInput label="quận, huyện" />}
                       MenuProps={MenuProps}
                     >
-                      {districtCurrent && districtCurrent.districts &&  districtCurrent.districts.map(
-                        (district) => (
+                      {districtCurrent &&
+                        districtCurrent.districts &&
+                        districtCurrent.districts.map((district) => (
                           <MenuItem
                             key={district.codename}
                             value={district.name}
@@ -177,9 +240,11 @@ const CheckOutPage = () => {
                           >
                             {district.name}
                           </MenuItem>
-                        )
-                      )}
+                        ))}
                     </Select>
+                    <p style={{ color: "red", fontSize: "14px" }}>
+                      {district ? "" : errors.district?.message}
+                    </p>
                   </FormControl>
                 </div>
               </div>
@@ -187,7 +252,7 @@ const CheckOutPage = () => {
                 style={{
                   marginTop: 15,
                   width: 600,
-                  border: "1px solid black",
+                  // border: "1px solid black",
                   // minHeight: 400,
                   display: "flex",
                   flexDirection: "row",
@@ -199,7 +264,8 @@ const CheckOutPage = () => {
                   <FormControl sx={{ width: 285 }}>
                     <InputLabel id="ward-label">xã, phường</InputLabel>
                     <Select
-                      disabled={true}
+                      {...register("ward")}
+                      // disabled={true}
                       labelId="ward-label"
                       id="ward-name"
                       value={ward}
@@ -207,36 +273,48 @@ const CheckOutPage = () => {
                       input={<OutlinedInput label="xã, phường" />}
                       MenuProps={MenuProps}
                     >
-                      {WardData.map((ward) => (
-                        <MenuItem
-                          key={ward.codename}
-                          value={ward.name}
-                          // style={getStyles(name, personName, theme)}
-                        >
-                          {ward.name}
-                        </MenuItem>
-                      ))}
+                      {wardCurrent &&
+                        wardCurrent.wards &&
+                        wardCurrent.wards.map((ward) => (
+                          <MenuItem
+                            key={ward.codename}
+                            value={ward.name}
+                            // style={getStyles(name, personName, theme)}
+                          >
+                            {ward.name}
+                          </MenuItem>
+                        ))}
                     </Select>
+                    <p style={{ color: "red", fontSize: "14px" }}>
+                      {ward ? "" : errors.ward?.message}
+                    </p>
                   </FormControl>
                 </div>
-                <TextField
-                  style={{ width: 285 }}
-                  id="outlined-basic"
-                  label="tên đường, số nhà"
-                  variant="outlined"
-                />
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <TextField
+                    {...register("address")}
+                    style={{ width: 285 }}
+                    id="outlined-basic"
+                    label="tên đường, số nhà"
+                    variant="outlined"
+                  />
+                  <p style={{ color: "red", fontSize: "14px" }}>
+                    {errors.address?.message}
+                  </p>
+                </div>
               </div>
             </div>
+            <Button variant="contained" type="submit">
+              Xác nhận
+            </Button>
           </form>
         </div>
-        <Divider />
-        <div style={{ minHeight: 200, border: "1px solid black" }}>
-          <div style={{ width: 600, height: 30, border: "1px solid black" }}>
+        <Divider variant="middle" />
+        <div style={{ minHeight: 200 }}>
+          <div style={{ width: 600, height: 30 }}>
             <p style={{ margin: 0 }}>Tóm tắt đơn hàng</p>
           </div>
-          <div
-            style={{ width: 600, border: "1px solid black", minHeight: 170 }}
-          >
+          <div style={{ width: 600, minHeight: 170 }}>
             {cartList.map((cart) => (
               <>
                 <div
@@ -327,7 +405,7 @@ const CheckOutPage = () => {
                     <p style={{ fontSize: 15 }}>{cart.price * cart.quantity}</p>
                   </div>
                 </div>
-                <Divider />
+                <Divider variant="middle" />
               </>
             ))}
           </div>
@@ -358,8 +436,14 @@ const CheckOutPage = () => {
             justifyContent: "space-between",
           }}
         >
-          <div>tổng cộng : {total}</div>
-          <div>đặt đơn</div>
+          <div>Tổng cộng : {total}</div>
+          <Button
+            variant="contained"
+            color="success"
+            style={{ width: "100px", height: 45 }}
+          >
+            <p style={{ fontSize: 14 }}>Đặt đơn</p>
+          </Button>
         </div>
       </div>
     </div>

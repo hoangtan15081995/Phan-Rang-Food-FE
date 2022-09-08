@@ -17,6 +17,7 @@ import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import GoogleIcon from "@mui/icons-material/Google";
 import PhoneModal from '../../components/phoneModal/PhoneModal';
 
+
 const LoginSchema = yup.object().shape({
   email: yup.string().email("Invalid email").required("Email is required"),
   password: yup.string().required("Password is required"),
@@ -32,6 +33,7 @@ function LoginPage() {
   const [error, setError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { locationPathname } = useSelector((state) => state.location);
+  const { cartList } = useSelector((state) => state.cart);
   const accessToken = window.localStorage.getItem("user");
 
  const { control, handleSubmit, formState:{ errors, isSubmitting } } = useForm({
@@ -52,7 +54,8 @@ function LoginPage() {
           // console.log(user.accessToken);
           setError(false);
           window.localStorage.setItem("accessToken", user.accessToken);
-          navigate("/");
+          cartList.length > 0 ? navigate("/checkout") : navigate("/");
+    
         })
         .catch((error) => {
           console.log(error.message)
