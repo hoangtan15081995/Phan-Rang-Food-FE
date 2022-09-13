@@ -1,5 +1,5 @@
 import { Button, Divider, IconButton, TextField } from '@mui/material';
-import React, {useState} from 'react';
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { DecreaseQuantity, IncreaseQuantity } from "../../features/shoppingCart/shoppingCartSlice";
 import "./CheckOutPage.css";
@@ -16,10 +16,13 @@ import Select from "@mui/material/Select";
 import ProvinceData from "../../Config/provinces";
 import DistrictData from "../../Config/districts";
 import WardData from "../../Config/wards";
-import FullProvinceData from "../../Config/vietnam-provinces.json"
+import FullProvinceData from "../../Config/vietnam-provinces.json";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { clearDelivery, setDelivery } from '../../features/deliveryAddress/deliveryAddressSlice';
+import EditIcon from "@mui/icons-material/Edit";
+import { useNavigate } from 'react-router-dom';
 
 
 const ITEM_HEIGHT = 48;
@@ -58,33 +61,74 @@ const CheckOutSchema = yup.object().shape({
 });
 
 const CheckOutPage = () => {
-  const defaultValues = {
-    name: "",
-    phone: "",
-    province: "",
-    district: "",
-    ward: "",
-    address:""
-  };
    const {
      control,
      handleSubmit,
      register,
      formState: { errors, isSubmitting },
    } = useForm({
-     resolver: yupResolver(CheckOutSchema),
-     defaultValues
+     resolver: yupResolver(CheckOutSchema)
    });
-  console.log(errors);
-  const onSubmit = (data) => console.log(data);
+  // console.log(errors);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [province, setProvince] = useState("");
   const [district, setDistrict] = useState("");
   const [ward, setWard] = useState("");
   const [address, setAddress] = useState("");
+  const [blockInput, setBlockInput] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const { deliveryAddress } = useSelector((state) => state.delivery);
+  // console.log(deliveryAddress);
 
+  useEffect(() => {
+    if (deliveryAddress.province !== undefined) {
+      setName(deliveryAddress.name);
+      setPhone(deliveryAddress.phone);
+      setProvince(deliveryAddress.province);
+      setDistrict(deliveryAddress.district);
+      setWard(deliveryAddress.ward);
+      setAddress(deliveryAddress.address);
+      setBlockInput(true)
+    }
+    // dispatch(clearDelivery());
+  }, [])
+  
+  const onSubmit = (data) => {
+    dispatch(
+      setDelivery({
+        name: data.name || name,
+        phone: data.phone || phone,
+        province: data.province || province,
+        district: data.district || district,
+        ward: data.ward || ward,
+        address: data.address || address,
+      })
+    );
+    setBlockInput(true);
+    console.log("ok");
+  };
+
+  const handleUpdate = () => {
+    dispatch(
+      setDelivery({
+        name: name,
+        phone: phone,
+        province: province,
+        district: district,
+        ward: ward,
+        address: address,
+      })
+    );
+    setBlockInput(true);
+    setIsEdit(false)
+  }
+  
+  const handleCompleted = () => {
+    navigate("/orderPage")
+  }
   let districtCurrent = FullProvinceData.find(
     (fullProvince) => fullProvince.name === province
   );
@@ -93,13 +137,20 @@ const CheckOutPage = () => {
     (fullDistrict) => fullDistrict.name === district
   );
 
-  // console.log(province);
-  // console.log(districtCurrent);
-  // console.log(wardCurrent);
-
   const { cartList } = useSelector((state) => state.cart);
   const theme = useTheme();
+  
 
+  const handleName = (event) => {
+      setName(event.target.value);
+  };
+
+  const handlePhone = (event) => {
+      setPhone(event.target.value);
+  };
+  const handleAddress = (event) => {
+      setAddress(event.target.value);
+  };
   const handleProvince = (event) => {
     // console.log(event);
       setProvince(event.target.value);
@@ -128,9 +179,20 @@ const CheckOutPage = () => {
       <div className="checkout-info">
         <p style={{ fontSize: 25, margin: 10 }}>Thanh toán</p>
         <Divider variant="middle" />
-        <div style={{ height: 400 }}>
-          <div style={{ width: 600, height: 30, textAlign: "start" }}>
+        <div style={{ minHeight: 400 }}>
+          <div
+            style={{
+              width: 600,
+              height: 30,
+              textAlign: "start",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
             <p style={{ margin: 10 }}>Địa chỉ nhận hàng</p>
+            <Button onClick={() => { setBlockInput(false); setIsEdit(true) }}>
+              <EditIcon style={{ color: "black" }} />
+            </Button>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div
@@ -158,16 +220,23 @@ const CheckOutPage = () => {
                     style={{ width: 285 }}
                     id="outlined-basic"
                     label="Tên"
+                    value={name}
+                    onChange={(event) => handleName(event)}
                     variant="outlined"
+                    disabled={blockInput}
+                    // onChange={(e) => setName(e.target.value)}
                   />
                   <p style={{ color: "red", fontSize: "14px" }}>
-                    {errors.name?.message}
+                    {name ? "" : errors.name?.message}
                   </p>
                 </div>
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   <TextField
                     {...register("phone")}
                     style={{ width: 285 }}
+                    disabled={blockInput}
+                    value={phone}
+                    onChange={(event) => handlePhone(event)}
                     id="outlined-basic"
                     label="Số điện thoại"
                     variant="outlined"
@@ -196,6 +265,7 @@ const CheckOutPage = () => {
                       {...register("province")}
                       labelId="province-label"
                       id="province-name"
+                      disabled={blockInput}
                       value={province}
                       onChange={(event) => handleProvince(event)}
                       input={<OutlinedInput label="Tỉnh, thành phố" />}
@@ -225,6 +295,7 @@ const CheckOutPage = () => {
                       // disabled={true}
                       labelId="district-label"
                       id="district-name"
+                      disabled={blockInput}
                       value={district}
                       onChange={(event) => handleDistrict(event)}
                       input={<OutlinedInput label="quận, huyện" />}
@@ -268,6 +339,7 @@ const CheckOutPage = () => {
                       // disabled={true}
                       labelId="ward-label"
                       id="ward-name"
+                      disabled={blockInput}
                       value={ward}
                       onChange={(event) => handleWard(event)}
                       input={<OutlinedInput label="xã, phường" />}
@@ -297,22 +369,43 @@ const CheckOutPage = () => {
                     id="outlined-basic"
                     label="tên đường, số nhà"
                     variant="outlined"
+                    onChange={(event) => handleAddress(event)}
+                    value={address}
+                    disabled={blockInput}
                   />
                   <p style={{ color: "red", fontSize: "14px" }}>
-                    {errors.address?.message}
+                    {address? "" : errors.address?.message}
                   </p>
                 </div>
               </div>
             </div>
-            <Button variant="contained" type="submit">
+            {isEdit ? 
+           <Button
+              variant="contained"
+              disabled={blockInput}
+              // type="submit"
+              onClick={handleUpdate}
+              style={{ marginBottom: 30 }}
+            >
+              Cập nhật
+            </Button>
+              :
+              <Button
+              variant="contained"
+              disabled={blockInput}
+              type="submit"
+              style={{ marginBottom: 30 }}
+            >
               Xác nhận
             </Button>
+            }
+            
           </form>
         </div>
         <Divider variant="middle" />
         <div style={{ minHeight: 200 }}>
           <div style={{ width: 600, height: 30 }}>
-            <p style={{ margin: 0 }}>Tóm tắt đơn hàng</p>
+            <p style={{ margin: 10 }}>Tóm tắt đơn hàng</p>
           </div>
           <div style={{ width: 600, minHeight: 170 }}>
             {cartList.map((cart) => (
@@ -432,18 +525,45 @@ const CheckOutPage = () => {
         <div
           style={{
             width: 600,
+            // border: "1px solid black",
             display: "flex",
             justifyContent: "space-between",
           }}
         >
-          <div>Tổng cộng : {total}</div>
-          <Button
-            variant="contained"
-            color="success"
-            style={{ width: "100px", height: 45 }}
+          <div
+            style={{
+              width: 300,
+              // border: "1px solid black",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              // alignItems: "center"
+            }}
           >
-            <p style={{ fontSize: 14 }}>Đặt đơn</p>
-          </Button>
+            <p style={{ fontSize: 19, margin: 0 }}>Tổng cộng</p>
+            <p style={{ fontSize: 17, margin: 0, fontWeight: "bold" }}>
+              {total}
+            </p>
+          </div>
+          <div
+            style={{
+              width: 300,
+              // border: "1px solid black",
+              display: "flex",
+              justifyContent: "end",
+              alignItems: "center",
+            }}
+          >
+            <Button
+              onClick={handleCompleted}
+              variant="contained"
+              color="success"
+              style={{ width: "250px", height: 50 }}
+              disabled={!blockInput}
+            >
+              <p style={{ fontSize: 14 }}>Đặt đơn</p>
+            </Button>
+          </div>
         </div>
       </div>
     </div>

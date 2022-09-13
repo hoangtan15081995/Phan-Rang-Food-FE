@@ -10,6 +10,7 @@ import coffeeReducer from "../features/coffee/coffeeSlice";
 import cartReducer from "../features/shoppingCart/shoppingCartSlice";
 import allFoodReducer from "../features/all-food/allFoodSlice";
 import foodDetailReducer from "../features/foodDetail/foodDetailSlice";
+import DeliveryAddressReducer from "../features/deliveryAddress/deliveryAddressSlice";
 import { combineReducers } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -33,7 +34,8 @@ const reducer = combineReducers({
     coffee: coffeeReducer,
     cart: cartReducer,
     allFood: allFoodReducer,
-    foodDetail: foodDetailReducer
+    foodDetail: foodDetailReducer,
+    delivery: DeliveryAddressReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

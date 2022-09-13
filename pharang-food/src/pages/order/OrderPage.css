@@ -1,5 +1,7 @@
 .order-page {
   margin-top: 90px;
   height: 100vh;
-  background-color: rgb(238, 182, 182);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

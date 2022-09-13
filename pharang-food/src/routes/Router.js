@@ -38,6 +38,7 @@ function Router() {
         <Route path="/order" element={<OrderPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/checkout" element={<CheckOutPage />} />
+        <Route path="/orderPage" element={<OrderPage />} />
       </Route>
       <Route element={<BlankLayout />}>
         <Route path="/login" element={<LoginPage />} />
